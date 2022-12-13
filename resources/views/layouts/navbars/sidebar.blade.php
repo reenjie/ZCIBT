@@ -1,4 +1,4 @@
-<div class="sidebar" data-image="{{ asset('light-bootstrap/img/sidebar-5.jpg') }}">
+<div class="sidebar"  data-color="red" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxbvyHGKChKOXdnjT1c9VI9bjRGJP1RivcwQ&usqp=CAU">
     <!--
 Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -6,8 +6,10 @@ Tip 2: you can also add an image using data-image tag
 -->
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text">
-                {{ __("Creative Tim") }}
+            <a href="#" class="simple-text">
+                {{ __("ZCIBT") }}
+                <br>
+                <span style="font-size:11px;">Zamboanga City Integrated Bus Terminal</span>
             </a>
         </div>
         <ul class="nav">
@@ -18,7 +20,7 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>
            
-            <li class="nav-item">
+       <!--      <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#laravelExamples" @if($activeButton =='laravel') aria-expanded="true" @endif>
                     <i>
                         <img src="{{ asset('light-bootstrap/img/laravel.svg') }}" style="width:25px">
@@ -44,44 +46,28 @@ Tip 2: you can also add an image using data-image tag
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
-            <li class="nav-item @if($activePage == 'table') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'table')}}">
-                    <i class="nc-icon nc-notes"></i>
-                    <p>{{ __("Table List") }}</p>
+            <li class="nav-item @if($activePage == 'busses') active @endif">
+                <a class="nav-link" href="{{route('page.index', 'busses')}}">
+                    <i class="nc-icon nc-bus-front-12"></i>
+                    <p>{{ __("Busses") }}</p>
                 </a>
             </li>
-            <li class="nav-item @if($activePage == 'typography') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'typography')}}">
-                    <i class="nc-icon nc-paper-2"></i>
-                    <p>{{ __("Typography") }}</p>
+            <li class="nav-item @if($activePage == 'routes') active @endif">
+                <a class="nav-link" href="{{route('page.index', 'routes')}}">
+                    <i class="nc-icon nc-square-pin"></i>
+                    <p>{{ __("Routes") }}</p>
                 </a>
             </li>
-            <li class="nav-item @if($activePage == 'icons') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'icons')}}">
-                    <i class="nc-icon nc-atom"></i>
-                    <p>{{ __("Icons") }}</p>
+            <li class="nav-item @if($activePage == 'schedules') active @endif">
+                <a class="nav-link" href="{{route('page.index', 'schedules')}}">
+                    <i class="nc-icon nc-watch-time"></i>
+                    <p>{{ __("Schedules") }}</p>
                 </a>
             </li>
-            <li class="nav-item @if($activePage == 'maps') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'maps')}}">
-                    <i class="nc-icon nc-pin-3"></i>
-                    <p>{{ __("Maps") }}</p>
-                </a>
-            </li>
-            <li class="nav-item @if($activePage == 'notifications') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'notifications')}}">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>{{ __("Notifications") }}</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active bg-danger" href="{{route('page.index', 'upgrade')}}">
-                    <i class="nc-icon nc-alien-33"></i>
-                    <p>{{ __("Upgrade to PRO") }}</p>
-                </a>
-            </li>
+         
+        
         </ul>
     </div>
 </div>
