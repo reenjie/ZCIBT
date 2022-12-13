@@ -1,70 +1,41 @@
 @extends('layouts.app', ['activePage' => 'register', 'title' => 'ZCIBT'])
 
 @section('content')
-    <div class="full-page register-page section-image" data-color="orange" data-image="{{ asset('light-bootstrap/img/bg5.jpg') }}">
+    <div class="full-page register-page section-image" data-color="black" data-image="{{ asset('light-bootstrap/img/bgreg.jpg') }}">
         <div class="content">
             <div class="container">
-                <div class="card card-register card-plain text-center">
+                <div class="card card-register card-plain ">
                     <div class="card-body ">
                         <div class="row">
-                            <div class="col-md-5 ml-auto">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <div class="icon">
-                                            <i class="nc-icon nc-circle-09"></i>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>{{ __('Free Account') }}</h4>
-                                        <p>{{ __('Here you can write a feature description for your dashboard, let the users know what is the value that you give them.') }}</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <div class="icon">
-                                            <i class="nc-icon nc-preferences-circle-rotate"></i>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>{{ __('Awesome Performances') }}</h4>
-                                        <p>{{ __('Here you can write a feature description for your dashboard, let the users know what is the value that you give them.') }}</p>
-                                    </div>
-                                </div>
-                                <div class="media">
-                                    <div class="media-left">
-                                        <div class="icon">
-                                            <i class="nc-icon nc-planet"></i>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4>{{ __('Global Support') }}</h4>
-                                        <p>{{ __('Here you can write a feature description for your dashboard, let the users know what is the value that you give them.') }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mr-auto">
+                            
+                            <div class="col-md-7 mr-auto">
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
-                                    <div class="card card-plain">
-                                        <div class="content">
+                                    <div class="card " >
+                                            <div class="card-body">
+                                            <div class="content">
                                             <div class="form-group">
-                                                <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
+                                                <h6 class="text-secondary">Name</h6>
+                                                <input type="text" name="name" id="name" class="form-control"  value="{{ old('name') }}" required autofocus>
                                             </div>
-
+                                          
                                             <div class="form-group">   {{-- is-invalid make border red --}}
-                                                <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter email" class="form-control" required>
+                                            <h6 class="text-secondary">Email</h6>
+                                                <input type="email" name="email" value="{{ old('email') }}" class="form-control" required>
                                             </div>
 
                                             <div class="form-group">
+                                            <h6 class="text-secondary">Password</h6>
                                                 <input type="password" name="password" class="form-control" required >
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" name="password_confirmation" placeholder="Password Confirmation" class="form-control" required autofocus>
+                                            <h6 class="text-secondary">Confirm Password</h6>
+                                                <input type="password" name="password_confirmation"  class="form-control" required autofocus>
                                             </div>
                                             <div class="form-group d-flex justify-content-center">
-                                                <div class="form-check rounded col-md-10 text-left">
-                                                    <label class="form-check-label text-white d-flex align-items-center">
-                                                        <input class="form-check-input" name="agree" type="checkbox" required >
+                                                <div class="form-check rounded col-md-10 text-left bg-secondary">
+                                                    <label class="form-check-label text-light   w-100 d-flex align-items-center">
+                                                        <input class="form-check-input " name="agree" type="checkbox" required >
                                                         <span class="form-check-sign"></span>
                                                         <b>{{ __('Agree with terms and conditions') }}</b>
                                                     </label>
@@ -72,11 +43,27 @@
                                             </div>
 
                                             <div class="footer text-center">
-                                                <button type="submit" class="btn btn-fill btn-neutral btn-wd">{{ __('Create Free Account') }}</button>
+                                                <button type="submit" class="btn btn-fill border-secondary btn-neutral btn-wd">{{ __('Create Free Account') }}</button>
                                             </div>
                                         </div>
+                                            </div>
+                                         
+                                     
                                     </div>
                                 </form>
+                            </div>
+                            <div class="col-md-5 ml-auto text-center">
+                                        <img src="{{asset('light-bootstrap/img/bgworld.svg')}}" style="width:100%" alt="">
+                                        <br>
+                                        <h2 style="text-align:center" class="text-white">
+                                            Safe Travel Tours
+                                            <br>
+                                          
+                                        </h2>
+                                        <h6  class="text-white">  <span style="font-size:12px">Zamboanga City Integrated Bus Terminal 
+                                            <br>
+                                            Ticket Reservation System
+                                        </span></h6>
                             </div>
                             <div class="col">
                                 @foreach ($errors->all() as $error)
