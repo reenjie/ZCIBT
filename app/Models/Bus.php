@@ -14,6 +14,8 @@ class Bus extends Model
         'seating_capacity',
         'company',
         'weight',
-        'color'
+        'color',
+        'per_column',
+        'per_row'
     ];
 }

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('company')->nullable();
             $table->text('weight')->nullable();
             $table->text('color')->nullable();
+            $table->integer('per_column');
+            $table->integer('per_row');
             $table->timestamps();
         });
     }
