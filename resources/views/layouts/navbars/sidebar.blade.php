@@ -66,6 +66,13 @@ Tip 2: you can also add an image using data-image tag
                     <p>{{ __("Schedules") }}</p>
                 </a>
             </li>
+
+            <li class="nav-item @if($activePage == 'tickets') active @endif">
+                <a class="nav-link" href="{{route('page.index', 'tickets')}}">
+                    <i class="nc-icon nc-paper-2"></i>
+                    <p>{{ __("Tickets") }}</p>
+                </a>
+            </li>
          
         
         </ul>

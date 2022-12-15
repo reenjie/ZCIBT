@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('row_seat_id');
             $table->integer('routes_id');
             $table->integer('ts_id');
+            $table->integer('user_id');
             $table->integer('exp_date')->nullable();
             $table->timestamps();
         });

@@ -13,6 +13,7 @@ class Ticket extends Model
         'bus_id',
         'routes_id',
         'ts_id',
+        'user_id',
         'exp_date'
     ];
 }
