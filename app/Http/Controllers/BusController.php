@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bus;
+use App\Models\Column_seats;
+use App\Models\Row_seats;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -35,7 +37,55 @@ class BusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $busnumb = $request->busnumber;
+      $seatcapacity = $request->seatcapacity;
+      $perrow = $request->perrow;
+      $percolumn = $request->percolumn;
+      $color = $request->color;
+      $company = $request->company;
+
+     
+
+            $b = Bus::create([
+                'Bus_No'=>$busnumb,
+                'seating_capacity'=>$seatcapacity,
+                'company'=>$company,
+                'weight'=>null,
+                'color'=>$color,
+                'per_column'=>$percolumn,
+                'per_row'=>$perrow,
+            ]);
+
+          $newbusid =  $b->id;
+
+            //save row seats
+            for ($i=1; $i <= $perrow ; $i++) { 
+                $row =  Row_seats::create([
+                    'bus_id'=>$newbusid,
+                    'row'=>$i,
+                ]);
+
+                $rowid[] = $row->id;
+
+             
+
+            }
+
+            for ($j=1; $j <= $percolumn ; $j++) { 
+                foreach ($rowid as $key => $value) {
+                
+                    Column_seats::create([
+                        'bus_id'=>$newbusid,
+                        'column'=>$j,
+                        'rowseat_id'=>$value
+                    ]);
+    
+                }
+            }
+            
+          
+
+        return redirect()->route('page.index', 'busses')->with('success','Saved Successfully!');
     }
 
     /**

@@ -9,7 +9,7 @@ class Bus extends Model
 {
     use HasFactory;
 
-    protected $filalble = [
+    protected $fillable = [
         'Bus_No',
         'seating_capacity',
         'company',

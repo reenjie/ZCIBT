@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
+use App\Models\Bus;
+use App\Models\Column_seats;
+use App\Models\Row_seats;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +24,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
+
+Route::post('addbus',[App\Http\Controllers\BusController::class, 'store'])->name('AddBus');
+Route::get('Viewing/Bus/Occs',function(Request $request){
+	$bus = Bus::where('id',$request->id)->get();
+	$busid = $request->id;
+	$columns = Column_seats::where('bus_id',$request->id)->get();
+	$rows = Row_seats::where('bus_id',$request->id)->get();
+	
+	return view('viewbus',compact('columns','rows','busid'));
+})->name('viewbus');
+
+
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('dashboard');
 

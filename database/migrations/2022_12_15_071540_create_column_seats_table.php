@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('column_seats', function (Blueprint $table) {
             $table->id();
             $table->integer('bus_id');
-            $table->integer('seat');
+            $table->integer('column');
+            $table->integer('rowseat_id');
             $table->timestamps();
         });
     }
