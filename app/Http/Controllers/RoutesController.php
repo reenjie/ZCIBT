@@ -35,7 +35,20 @@ class RoutesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $from = $request->from;
+         $to   = $request->to;
+         $fare = $request->fare;
+
+         Routes::create([
+            'lng'=>null,
+            'lat'=>null,
+            'from'=>$from,
+            'to' =>$to,
+            'fare' =>$fare
+    
+         ]);
+         
+        return redirect()->route('page.index', 'routes')->with('success','Saved Successfully!');
     }
 
     /**

@@ -40,6 +40,8 @@
       $data = DB::select('SELECT * FROM `buses`');
     @endphp
 
+      
+      @if(count($data)>=1)
       @foreach($data as $item)
       <tr>
       <td style="font-weight:bold">{{$item->Bus_No}}</td>
@@ -49,17 +51,29 @@
       <td>{{$item->per_column}} x {{$item->per_row}}</td>
       <td>
       <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->id])}}' "><i class="fas fa-eye"></i></button>
-        <button class="btn btn-link text-success btn-sm"><i class="fas fa-edit"></i></button>
-        <button class="btn btn-link text-danger ml-2  btn-sm"><i class="fas fa-trash-can"></i></button>
+      {{--   --}}
+        <button onclick="window.location.href='{{route('edit',['type'=>'bus','id'=>$item->id,'data'=>$data ])}}' " class="btn btn-link text-success btn-sm"><i class="fas fa-edit"></i></button>
+        <button data-id="{{$item->id}}" class="btn btn-link text-danger ml-2  btn-sm delete"><i class="fas fa-trash-can"></i></button>
         
        
       </td>
     </tr>
       @endforeach
- 
+      @endif
  
   </tbody>
 </table>
+
+@if(count($data)==0)
+  <h6 style="text-align:center">
+      <img src="{{asset('light-bootstrap/img/notfound.svg')}}" style="width: 300px" alt="">
+
+    <br> <br>
+    
+    No Data Found..</h6>
+
+    <br> <br>
+@endif
 
 
                       </div>
@@ -72,6 +86,23 @@
         </div>
     </div>
   
+    <script>
+      $('.delete').click(function(){
+        var id = $(this).data('id');
+        swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be recover it and all data connected to this bus will be deleted!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+      window.location.href='{{route("delete",["type"=>"bus"])}}'+'&id='+id;
+  }
+});
+      })
+    </script>
 
 
 @endsection

@@ -26,6 +26,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::post('addbus',[App\Http\Controllers\BusController::class, 'store'])->name('AddBus');
+
+Route::post('AddRoutes',[App\Http\Controllers\RoutesController::class, 'store'])->name('AddRoutes');
+
 Route::get('Viewing/Bus/Occs',function(Request $request){
 	$bus = Bus::where('id',$request->id)->get();
 	$busid = $request->id;
@@ -38,6 +41,12 @@ Route::get('Viewing/Bus/Occs',function(Request $request){
 
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('dashboard');
+
+Route::get('edit','App\Http\Controllers\EditController@index')->name('edit');
+
+Route::post('update','App\Http\Controllers\UpdateController@index')->name('update');
+
+Route::get('delete','App\Http\Controllers\DeleteController@index')->name('delete');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
