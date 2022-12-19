@@ -34,6 +34,7 @@
                         <div class="card-body">
                          
                         <h4 class="text-light">Routes</h4>
+                        <div class="table-responsive">
                         <table class="table table-striped text-light">
                     <thead class="">
                         <tr class="table-danger" >
@@ -66,12 +67,14 @@
                     </tbody>
                     </table>
                         </div>
+                        </div>
                       </div>
 
                       <div class="card card-hidden bg-transparent  mb-2">
                         <div class="card-body">
                         <h4 class="text-light">Schedules</h4>
-                        <table class="table table-striped text-light">
+                    <div class="table-responsive">
+                    <table class="table table-striped text-light">
                     <thead class="">
                         <tr class="table-danger" >
                         <th scope="col" class="text-dark">Departure</th>
@@ -113,6 +116,7 @@
                       
                     </tbody>
                     </table>
+                    </div>
                         </div>
                       </div>
                     </div>

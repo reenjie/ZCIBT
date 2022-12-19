@@ -7,13 +7,13 @@
             <span style="font-size:11px">Zamboanga City Integrated Bus Terminal</span>
 
             </a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-bar burger-lines"></span>
                 <span class="navbar-toggler-bar burger-lines"></span>
                 <span class="navbar-toggler-bar burger-lines"></span>
-            </button>
+            </button> -->
         </div>
-        <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <div class=" justify-content-end" id="navbar">
             <ul class="navbar-nav" style="font-size:13px">
                
                 <li class="nav-item @if($activePage == 'register') active @endif">
@@ -30,3 +30,11 @@
         </div>
     </div>
 </nav>
+
+<style>
+    @media screen and (max-width:768px){
+        #navbar{
+            display:block;
+        }
+    }
+</style>
