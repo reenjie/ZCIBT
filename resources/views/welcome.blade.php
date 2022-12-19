@@ -11,7 +11,7 @@
                       <h6 class="text-light" style="font-weight:normal">Ticket Reservation System</h6>
                       <br>
                       <h4 class="text-light">
-                        <button class="btn btn-warning" onclick="">Reserve now</button>
+                        <button class="btn btn-warning" onclick="window.location.href='{{route('reserve')}}'">Reserve now</button>
                         <button class="btn btn-info">About Us</button>
 
                       </h4>
@@ -34,72 +34,85 @@
                         <div class="card-body">
                          
                         <h4 class="text-light">Routes</h4>
-                    <table class="table text-light ">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            </tr>
-                            <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            </tr>
-                            <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                        </table>
+                        <table class="table table-striped text-light">
+                    <thead class="">
+                        <tr class="table-danger" >
+                        <th scope="col" class="text-dark">From</th>
+                        <th scope="col" class="text-dark">To</th>
+                        <th scope="col" class="text-dark">Fare</th>
+                     
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $data = DB::select('SELECT * FROM `routes`');
+                      @endphp
+                  
+                        
+                        @if(count($data)>=1)
+                        @foreach($data as $item)
+                        <tr>
+                            <td style="font-weight:bold">{{$item->from}}</td>
+                            <td style="font-weight:bold">{{$item->to}}</td>
+                            <td>&#8369; {{$item->fare}}</td>
+                        
+                    
+                        {{--   --}}
+                       
+                      </tr>
+                        @endforeach
+                        @endif
+                      
+                    </tbody>
+                    </table>
                         </div>
                       </div>
 
                       <div class="card card-hidden bg-transparent  mb-2">
                         <div class="card-body">
                         <h4 class="text-light">Schedules</h4>
-                    <table class="table text-light">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            </tr>
-                            <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            </tr>
-                            <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                        </table>
+                        <table class="table table-striped text-light">
+                    <thead class="">
+                        <tr class="table-danger" >
+                        <th scope="col" class="text-dark">Departure</th>
+                        <th scope="col" class="text-dark">Estimate Arrival</th>
+                        <th scope="col" class="text-dark">Schedule</th>
+                        <th scope="col" class="text-dark">Status</th>
+                        <th scope="col" class="text-dark">Created</th>
+                    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $data = DB::select('SELECT * FROM `travel_schedules` where status = 1');
+                      @endphp
+                  
+                        
+                        @if(count($data)>=1)
+                        @foreach($data as $item)
+                        <tr>
+                        <td style="font-weight:bold">{{date('h:ia',strtotime($item->departure))}} </td>
+                         <td style="font-weight:bold">{{date('h:ia',strtotime($item->est_arrival))}}</td>
+                        <td >{{date('m/d/Y | F j,Y',strtotime($item->schedule))}}</td>
+                      
+                        <td >
+                            @if($item->status == 0)
+                            <span class="badge bg-danger">Inactive</span>
+                            @else 
+                            <span class="badge bg-success">Active</span>
+                            @endif
+                       
+                        </td>
+                        <td>{{date('F j,Y',strtotime($item->created_at))}}</td>
+                    
+                       
+                       
+                      </tr>
+                        @endforeach
+                        @endif
+                      
+                    </tbody>
+                    </table>
                         </div>
                       </div>
                     </div>

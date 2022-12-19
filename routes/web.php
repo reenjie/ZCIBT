@@ -29,14 +29,28 @@ Route::post('addbus',[App\Http\Controllers\BusController::class, 'store'])->name
 
 Route::post('AddRoutes',[App\Http\Controllers\RoutesController::class, 'store'])->name('AddRoutes');
 
+Route::post('addfarediscount',[App\Http\Controllers\FareDiscounts::class, 'store'])->name('addfarediscount');
+
+Route::post('Addschedule',[App\Http\Controllers\TravelScheduleController::class, 'store'])->name('Addschedule');
+
+Route::post('Addtrips',[App\Http\Controllers\TravelScheduleController::class, 'storetrips'])->name('Addtrips');
+
 Route::get('Viewing/Bus/Occs',function(Request $request){
+	
+	$viewingticket = $request->viewingticket;
+	
+	
 	$bus = Bus::where('id',$request->id)->get();
 	$busid = $request->id;
 	$columns = Column_seats::where('bus_id',$request->id)->get();
 	$rows = Row_seats::where('bus_id',$request->id)->get();
 	
-	return view('viewbus',compact('columns','rows','busid'));
+	return view('viewbus',compact('columns','rows','busid','viewingticket','bus'));
 })->name('viewbus');
+
+Route::get('Reserve',function(Request $request){
+	return view('reserve');
+})->name('reserve');
 
 
 

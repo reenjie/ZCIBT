@@ -3,83 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Models\Travel_schedule;
+use App\Models\trip;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
 
 class TravelScheduleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
-        //
+      $schedule = $request->schedule;
+      $status   = $request->status;
+      $departure= $request->departure;
+      $arrival  = $request->arrival;
+
+      Travel_schedule::create([
+        'departure'=>$departure,
+        'est_arrival'=>$arrival,
+        'schedule'=>$schedule,
+        'status'=>$status
+      ]);
+
+      return redirect()->route('page.index', 'schedules')->with('success','Schedule Saved Successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Travel_schedule  $travel_schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Travel_schedule $travel_schedule)
-    {
-        //
-    }
+    
+    public function storetrips(Request $request){
+        $bus = $request->bus;
+        $route = $request->route;
+        $schedule = $request->schedule;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Travel_schedule  $travel_schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Travel_schedule $travel_schedule)
-    {
-        //
-    }
+        $check = trip::where('bus_id',$bus)->where('routes_id',$route)->where('TS_id',$schedule)->get();
+        $check2 = trip::where('bus_id',$bus)->where('TS_id',$schedule)->get();
+        if(count($check)>=1){
+            return redirect()->back()->with('error','Bus Trip already Exist!');
+        }else {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Travel_schedule  $travel_schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Travel_schedule $travel_schedule)
-    {
-        //
-    }
+            if(count($check2)>=1){
+                return redirect()->back()->with('error','Bus Trip already Exist!');
+            }else {
+                trip::create([
+                'bus_id'=>$bus,
+                'TS_id'=>$schedule,
+                'routes_id'=>$route
+            ]);
+    
+            return redirect()->route('page.index', 'trips')->with('success','Trip Saved Successfully!');
+            }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Travel_schedule  $travel_schedule
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Travel_schedule $travel_schedule)
-    {
-        //
+
+
+        
+        }
+
+/* 
+       */
+        
     }
 }

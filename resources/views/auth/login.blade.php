@@ -13,6 +13,11 @@
                             </div>
                             <div class="card-body ">
                                 <div class="card-body">
+                                    @if(session()->has('success'))
+                                    <div class="alert alert-warning">
+                                        {{session()->get('success')}}
+                                    </div>
+                                    @endif
                                     <div class="form-group">
                                         <label for="email" class="col-md-6 col-form-label">{{ __('Email') }}</label>
             
@@ -54,7 +59,7 @@
                                         <button type="submit" class="btn btn-warning btn-wd">{{ __('Login') }}</button>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <a class="btn btn-link"  style="color:#23CCEF" href="{{ route('password.request') }}">
+                                        <a class="btn btn-link"  style="color:#23CCEF" href="#">
                                         {{ __('Forgot password?') }}
                                         </a>
                                         <a class="btn btn-link" style="color:#23CCEF" href="{{ route('register') }}">

@@ -54,7 +54,7 @@
                                                         <div class="col-md-12">
                                                         <div class="form-group">
                                                 <h6 class="text-secondary">Address</h6>
-                                              <textarea name="address" id="" class="form-control mb-2" style="height:80px"></textarea>
+                                              <textarea name="address" id="" class="form-control mb-2" style="height:80px">{{ old('address') }}</textarea>
                                                         </div>
                                                         </div>
 
@@ -63,11 +63,18 @@
                                             <h6 class="text-secondary">Email</h6>
                                                 <input type="email" name="email" value="{{ old('email') }}" class="form-control" required>
                                             </div>
+                                            @foreach ($errors->all() as $error)
+                                    <div class="alert alert-danger alert-dismissible fade show" >
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times;</a>
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
 
                                             <div class="form-group">
                                             <h6 class="text-secondary">Password</h6>
                                                 <input type="password" name="password" class="form-control" required >
                                             </div>
+                                          
                                             <div class="form-group">
                                             <h6 class="text-secondary">Confirm Password</h6>
                                                 <input type="password" name="password_confirmation"  class="form-control" required autofocus>
@@ -131,12 +138,7 @@
                                         </span></h6>
                             </div>
                             <div class="col">
-                                @foreach ($errors->all() as $error)
-                                    <div class="alert alert-warning alert-dismissible fade show" >
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close"> &times;</a>
-                                        {{ $error }}
-                                    </div>
-                                @endforeach
+                              
                             </div>
                         </div>
                     </div>

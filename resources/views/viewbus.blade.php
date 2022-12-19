@@ -4,7 +4,23 @@
     
             <div class="content">
             <div class="container-fluid">
+                @isset($viewingticket)
+                <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index', 'trips')}}' ">Back</button>
+                @else 
                 <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index', 'busses')}}' ">Back</button>
+                @endisset
+
+                <br>
+                
+                <h5 class="mt-2" style="font-weight:bold">
+                <span style="font-weight:normal;font-size:14px">Bus No#:</span>
+               
+                @foreach($bus as $bal)
+                    {{$bal->Bus_No}}
+                @endforeach
+                </h5>
+               <br>
+
             <h6 style="text-align:center">FRONT</h6>
         <div class="table-responsive" >
         <table class="table table-bordered table-light">

@@ -30,6 +30,10 @@ class EditController extends Controller
             return view('action.updateroutes',compact('UpdateData'));
         break;
         
+
+        case 'schedule':
+            return view('action.updateschedule',compact('UpdateData'));
+        break;
      
        }
     }

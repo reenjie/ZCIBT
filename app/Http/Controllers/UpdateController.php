@@ -5,6 +5,8 @@ use App\Models\Bus;
 use App\Models\Routes;
 use App\Models\Column_seats;
 use App\Models\Row_seats;
+use App\Models\Fare_discount;
+use App\Models\Travel_schedule;
 use Illuminate\Http\Request;
 
 class UpdateController extends Controller
@@ -52,6 +54,39 @@ class UpdateController extends Controller
                 'fare' =>$fare
             ]);
             return redirect()->route('page.index', 'routes')->with('success','Updated Successfully!');
+        break;
+
+
+
+        case 'farediscount':
+            
+            $title = $request->title;
+            $discount = $request->fare;
+    
+            Fare_discount::where('id',$id)->update([
+                'title'=>$title,
+                'discount'=>$discount
+            ]);
+    
+            return redirect()->back()->with('success','Fare Discount Updated Successfully!');
+
+        break;
+
+
+        case 'schedule':
+            $schedule = $request->schedule;
+            $status   = $request->status;
+            $departure= $request->departure;
+            $arrival  = $request->arrival;
+      
+            Travel_schedule::where('id',$id)->update([
+              'departure'=>$departure,
+              'est_arrival'=>$arrival,
+              'schedule'=>$schedule,
+              'status'=>$status
+            ]);
+      
+            return redirect()->route('page.index', 'schedules')->with('success','Schedule Updated Successfully!');
         break;
         
      

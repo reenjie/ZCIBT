@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('buses', function (Blueprint $table) {
+        Schema::create('fare_discounts', function (Blueprint $table) {
             $table->id();
-            $table->text('Bus_No')->unique();
-            $table->integer('seating_capacity');
-            $table->text('company')->nullable();
-            $table->text('weight')->nullable();
-            $table->text('color')->nullable();
-            $table->integer('per_column');
-            $table->integer('per_row');
+            $table->text('title');
+            $table->decimal('discount');
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('buses');
+        Schema::dropIfExists('fare_discounts');
     }
 };

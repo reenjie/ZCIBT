@@ -8,6 +8,8 @@ use App\Models\Ticket;
 use App\Models\Travel_schedule;
 use App\Models\Column_seats;
 use App\Models\Row_seats;
+use App\Models\Fare_discount;
+use App\Models\trip;
 use Illuminate\Http\Request;
 
 class DeleteController extends Controller
@@ -21,17 +23,26 @@ class DeleteController extends Controller
             Column_seats::where('bus_id',$id)->delete();
             Row_seats::where('bus_id',$id)->delete();
             Bus::where('id',$id)->delete();
-
-            return redirect()->back()->with('success','Data Successfully Deleted');
         break;
 
         case 'routes':
             Routes::where('id',$id)->delete();
-            return redirect()->back()->with('success','Data Successfully Deleted');
         break;
         
-        
-      }
 
+        case 'farediscount':
+          Fare_discount::where('id',$id)->delete(); 
+        break;
+
+        case 'schedule':
+          Travel_schedule::where('id',$id)->delete();
+        break;
+        
+
+        case 'trip':
+          trip::where('id',$id)->delete();
+        break;
+      }
+      return redirect()->back()->with('success','Data Successfully Deleted');
     }
 }

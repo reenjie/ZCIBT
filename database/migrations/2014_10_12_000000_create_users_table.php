@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('middlename');
             $table->string('lastname');
             $table->date('birthdate');
-            $table->integer('user_type')->comment('0= Admin , 1 = Driver , 2 = Conductor');
+            $table->integer('user_type')->comment('0= Admin , 1 = Driver , 2 = Conductor ,3= user');
             $table->text('license_no')->nullable();
             $table->text('address');
             $table->text('contact_no');
