@@ -17,6 +17,7 @@ use App\Models\Row_seats;
 */
 
 Route::get('/', function () {
+	session()->flush();
     return view('welcome');
 });
 
@@ -35,20 +36,23 @@ Route::post('Addschedule',[App\Http\Controllers\TravelScheduleController::class,
 
 Route::post('Addtrips',[App\Http\Controllers\TravelScheduleController::class, 'storetrips'])->name('Addtrips');
 
+Route::get('Payment/reserve/tickets',[App\Http\Controllers\TicketController::class, 'payticket'])->name('payticketregister');
+
 Route::get('Viewing/Bus/Occs',function(Request $request){
 	
 	$viewingticket = $request->viewingticket;
-	
+	$reserve = $request->reserve;
 	
 	$bus = Bus::where('id',$request->id)->get();
 	$busid = $request->id;
 	$columns = Column_seats::where('bus_id',$request->id)->get();
 	$rows = Row_seats::where('bus_id',$request->id)->get();
 	
-	return view('viewbus',compact('columns','rows','busid','viewingticket','bus'));
+	return view('viewbus',compact('columns','rows','busid','viewingticket','bus','reserve'));
 })->name('viewbus');
 
 Route::get('Reserve',function(Request $request){
+	session()->flush();
 	return view('reserve');
 })->name('reserve');
 

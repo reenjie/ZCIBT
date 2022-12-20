@@ -2,12 +2,18 @@
 
 @section('content')
     
-            <div class="content">
+            <div class="content bg-light p-5 " >
             <div class="container-fluid">
                 @isset($viewingticket)
                 <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index', 'trips')}}' ">Back</button>
                 @else 
-                <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index', 'busses')}}' ">Back</button>
+              
+
+                    @isset($reserve)
+                    <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('reserve')}}' ">Back</button>
+                        @else 
+                        <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index', 'busses')}}' ">Back</button>
+                    @endisset
                 @endisset
 
                 <br>
@@ -19,9 +25,14 @@
                     {{$bal->Bus_No}}
                 @endforeach
                 </h5>
+
+                @isset($reserve)
+                <h3>Reserve your seat.</h3>
+                @endisset
                <br>
 
-            <h6 style="text-align:center">FRONT</h6>
+            <h6 style="text-align:center">FRONT OF THE BUS</h6>
+        <div class="container p-5">
         <div class="table-responsive" >
         <table class="table table-bordered table-light">
   <thead>
@@ -42,6 +53,11 @@
                             <td >
                                 <span style="font-size:11px">Seat# {{$col->id}}</span>
                                 <br>
+                                @isset($reserve)
+                                <!-- <span class="badge bg-danger">Occupied</span> -->
+                            
+                                <button data-colid = "{{$col->id}}" data-rowid ="{{$col->rowseat_id}}" class="select btn btn-dark btn-sm px-3">Select</button>
+                                @endisset
                            
                             </td>
                             @endif
@@ -52,10 +68,29 @@
   </tbody>
 </table>
         </div>
-<h6 style="text-align:center">BACK</h6>
+        </div>
+<h6 style="text-align:center">BACK OF THE BUS</h6>
    
             </div>
             </div>
        
+<script>
+    $('.select').click(function(){
+        var colid = $(this).data('colid');
+        var rowid = $(this).data('rowid');
 
+        swal({
+  title: "Are you sure?",
+  text: "Secure ticket payment first before proceeding to your reservation.You will be asked to pay via Credit cards.",
+  icon: "warning",
+  buttons: true,
+  dangerMode: false,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    window.location.href= '{{route('payticketregister')}}'+'?colid='+colid+'&rowid='+rowid;
+  } 
+});
+    })
+</script>
 @endsection

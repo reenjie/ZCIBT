@@ -152,26 +152,26 @@ lbd = {
                         $toggle.addClass("toggled");
                     }, 430);
 
-                    // main_panel_height = $('.main-panel')[0].scrollHeight;
-                    // $layer = $('<div class="close-layer"></div>');
-                    // $layer.css('height', main_panel_height + 'px');
-                    // $layer.appendTo(".main-panel");
+                    main_panel_height = $(".main-panel")[0].scrollHeight;
+                    $layer = $('<div class="close-layer"></div>');
+                    $layer.css("height", main_panel_height + "px");
+                    $layer.appendTo(".main-panel");
 
-                    // setTimeout(function () {
-                    //     $layer.addClass("visible");
-                    // }, 100);
+                    setTimeout(function () {
+                        $layer.addClass("visible");
+                    }, 100);
 
-                    // $layer.click(function () {
-                    //     $("html").removeClass("nav-open");
-                    //     mobile_menu_visible = 0;
+                    $layer.click(function () {
+                        $("html").removeClass("nav-open");
+                        mobile_menu_visible = 0;
 
-                    //     $layer.removeClass("visible");
+                        $layer.removeClass("visible");
 
-                    //     setTimeout(function () {
-                    //         $layer.remove();
-                    //         $toggle.removeClass("toggled");
-                    //     }, 400);
-                    // });
+                        setTimeout(function () {
+                            $layer.remove();
+                            $toggle.removeClass("toggled");
+                        }, 400);
+                    });
 
                     $("html").addClass("nav-open");
                     mobile_menu_visible = 1;

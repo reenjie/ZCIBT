@@ -30,7 +30,10 @@
             @endif
 
             <div class="@if (auth()->check() && request()->route()->getName() != "") main-panel @endif">
+                @if(session()->has('reservation'))
+                @else
                 @include('layouts.navbars.navbar')
+                @endif
                 @yield('content')
                 @include('layouts.footer.nav')
             </div>
