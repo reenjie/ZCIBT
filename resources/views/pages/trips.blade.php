@@ -13,7 +13,11 @@
                         </div>
                         <div class="card-body ">
                           
-                       <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index','addTrip')}}' "  >Add <i class="fas fa-plus-circle"></i></button>
+                     
+                       @if(Auth::user()->user_type != 3)
+      <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index','addTrip')}}' "  >Add <i class="fas fa-plus-circle"></i></button>
+                       
+    @endif 
                        @if(session()->has('success'))
                        <div class="alert alert-success alert-dismissible fade show" role="alert">
               {{session()->get('success')}}
@@ -33,6 +37,7 @@
                     <th scope="col" class="text-dark">Schedule</th>
                     <th scope="col" class="text-dark">Fare</th>
                     <th scope="col" class="text-dark">Action</th>
+                    
                     </tr>
                 </thead>
   <tbody>
@@ -46,7 +51,10 @@ t.created_at as tripcreated,t.bus_id,t.routes_id,t.TS_id,t.id
 from buses b 
 INNER join trips t on b.id = t.bus_id 
 INNER join travel_schedules s on t.TS_id = s.id
-inner join routes r on t.routes_id = r.id;');
+inner join routes r on t.routes_id = r.id order by s.schedule desc;');
+
+
+$datenow = date('Y-m-d');
     @endphp
 
       
@@ -69,7 +77,10 @@ inner join routes r on t.routes_id = r.id;');
             <br>
             Vacant Seats:
             <br>
-            <span style="font-weight:bold">51</span>
+            @php
+            $vacant = DB::select('select * from tickets where bus_id = '.$item->bus_id.' and routes_id = '.$item->routes_id.' and ts_id ='.$item->TS_id.' ')
+            @endphp
+            <span style="font-weight:bold">{{$item->seating_capacity - count($vacant)}}</span>
         </span>
         </td>
         <td>
@@ -82,7 +93,13 @@ inner join routes r on t.routes_id = r.id;');
         @if($item->status == 0)
         <span class="badge bg-danger">Inactive</span>
         @else 
-        <span class="badge bg-success">Active</span>
+        @if($datenow > $item->schedule)
+        <span class="badge bg-danger">Inactive</span>
+          @else 
+          <span class="badge bg-success">Active</span>
+          @endif
+
+       
         @endif
        
         <br>
@@ -104,10 +121,22 @@ inner join routes r on t.routes_id = r.id;');
         </td>
         
       <td>
-      <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->bus_id,'viewingticket'=>true])}}' "><i class="fas fa-eye"></i></button>
+
+      @if(Auth::user()->user_type == 3)
+          @if($datenow > $item->schedule)
+          <span class="badge bg-danger">Sold Trips</span>
+          @else 
+          <button  class="btn btn-primary btn-sm" onclick="window.location.href='{{route('viewbus',['trip_id'=>$item->id,'reserve'=>true,'id'=>$item->bus_id,'authenticathed'=>true])}}' ">Reserve <i class="fas fa-ticket"></i></button>
+          @endif
+
+    
+        @else 
+  <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->bus_id,'viewingticket'=>true])}}' "><i class="fas fa-eye"></i></button>
  
         <button data-id="{{$item->id}}" class="btn btn-link text-danger ml-2  btn-sm delete"><i class="fas fa-trash-can"></i></button>
         
+    @endif 
+      
        
       </td>
     </tr>

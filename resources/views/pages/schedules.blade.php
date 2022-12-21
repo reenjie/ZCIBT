@@ -21,8 +21,12 @@
                          </div>
                            @endif
 
-                        <button onclick="window.location.href='{{route('page.index','addschedule')}}' " class="btn btn-warning btn-sm">Add <i class="fas fa-plus-circle"></i></button>
+                        
 
+                        @if(Auth::user()->user_type != 3)
+    <button onclick="window.location.href='{{route('page.index','addschedule')}}' " class="btn btn-warning btn-sm">Add <i class="fas fa-plus-circle"></i></button>
+
+    @endif 
                         <div class="table-responsive">
                         <table class="table table-striped">
                     <thead class="">
@@ -32,12 +36,16 @@
                         <th scope="col" class="text-dark">Schedule</th>
                         <th scope="col" class="text-dark">Status</th>
                         <th scope="col" class="text-dark">Created</th>
-                        <th scope="col" class="text-dark">Action</th>
+                        
+                        @if(Auth::user()->user_type != 3)
+    <th scope="col" class="text-dark">Action</th>
+    @endif 
                         </tr>
                     </thead>
                     <tbody>
                         @php
                         $data = DB::select('SELECT * FROM `travel_schedules`');
+                        $datenow = date('Y-m-d');
                       @endphp
                   
                         
@@ -52,19 +60,26 @@
                             @if($item->status == 0)
                             <span class="badge bg-danger">Inactive</span>
                             @else 
+                              @if($datenow > $item->schedule)
+                            <span class="badge bg-danger">Inactive</span>
+                              @else 
                             <span class="badge bg-success">Active</span>
+
+                              @endif
                             @endif
                        
                         </td>
                         <td>{{date('F j,Y',strtotime($item->created_at))}}</td>
                     
-                       
-                        <td>
+                        @if(Auth::user()->user_type != 3)
+     <td>
                           <button onclick="window.location.href='{{route('edit',['type'=>'schedule','id'=>$item->id,'data'=>$data ])}}' " class="btn btn-link text-success btn-sm"><i class="fas fa-edit"></i></button>
                           <button data-id="{{$item->id}}" class="btn btn-link text-danger ml-2  btn-sm delete"><i class="fas fa-trash-can"></i></button>
                           
                          
                         </td>
+    @endif 
+                       
                       </tr>
                         @endforeach
                         @endif

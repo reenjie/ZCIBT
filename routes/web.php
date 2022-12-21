@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Bus;
 use App\Models\Column_seats;
+use App\Models\trip;
 use App\Models\Row_seats;
 /*
 |--------------------------------------------------------------------------
@@ -38,23 +39,40 @@ Route::post('Addtrips',[App\Http\Controllers\TravelScheduleController::class, 's
 
 Route::get('Payment/reserve/tickets',[App\Http\Controllers\TicketController::class, 'payticket'])->name('payticketregister');
 
+Route::post('reserveticket',[App\Http\Controllers\TicketController::class, 'reserve'])->name('reserveticket');
+
+Route::get('changeseat',[App\Http\Controllers\TicketController::class, 'changeseat'])->name('changeseat');
 Route::get('Viewing/Bus/Occs',function(Request $request){
 	
 	$viewingticket = $request->viewingticket;
 	$reserve = $request->reserve;
-	
+	$tripid =  $request->trip_id;
+	$authenticathed = $request->authenticathed;
+
 	$bus = Bus::where('id',$request->id)->get();
 	$busid = $request->id;
 	$columns = Column_seats::where('bus_id',$request->id)->get();
 	$rows = Row_seats::where('bus_id',$request->id)->get();
+
 	
-	return view('viewbus',compact('columns','rows','busid','viewingticket','bus','reserve'));
+	$ts_id = trip::findorFail($tripid)->TS_id;
+
+
+	return view('viewbus',compact('columns','rows','busid','viewingticket','bus','reserve','tripid','authenticathed','ts_id'));
 })->name('viewbus');
 
 Route::get('Reserve',function(Request $request){
 	session()->flush();
 	return view('reserve');
 })->name('reserve');
+
+Route::get('viewusertickets',function(Request $request){
+	$userid = $request->id;
+	$user   = $request->user;
+
+	return view('pages.viewtickets',compact('userid','user'));
+
+})->name('viewusertickets');
 
 
 

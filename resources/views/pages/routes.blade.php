@@ -20,8 +20,11 @@
                          </div>
                            @endif
 
-                        <button onclick="window.location.href='{{route('page.index','addroutes')}}' " class="btn btn-warning btn-sm">Add <i class="fas fa-plus-circle"></i></button>
+                       
+                        @if(Auth::user()->user_type != 3)
+     <button onclick="window.location.href='{{route('page.index','addroutes')}}' " class="btn btn-warning btn-sm">Add <i class="fas fa-plus-circle"></i></button>
                         <button class="btn btn-primary btn-sm"  onclick="window.location.href='{{route('page.index','farediscounts')}}' " >Fare Discounts <i class="fas fa-cogs"></i></button>
+                          @endif 
                         <div class="table-responsive">
                         <table class="table table-striped">
                     <thead class="">
@@ -29,7 +32,10 @@
                         <th scope="col" class="text-dark">From</th>
                         <th scope="col" class="text-dark">To</th>
                         <th scope="col" class="text-dark">Fare</th>
-                        <th scope="col" class="text-dark">Action</th>
+                      
+                        @if(Auth::user()->user_type != 3)
+      <th scope="col" class="text-dark">Action</th>
+    @endif 
                         </tr>
                     </thead>
                     <tbody>
@@ -47,12 +53,15 @@
                         
                     
                         {{--   --}}
-                        <td>
+                        @if(Auth::user()->user_type != 3)
+     <td>
                           <button onclick="window.location.href='{{route('edit',['type'=>'routes','id'=>$item->id,'data'=>$data ])}}' " class="btn btn-link text-success btn-sm"><i class="fas fa-edit"></i></button>
                           <button data-id="{{$item->id}}" class="btn btn-link text-danger ml-2  btn-sm delete"><i class="fas fa-trash-can"></i></button>
                           
                          
                         </td>
+    @endif 
+                       
                       </tr>
                         @endforeach
                         @endif

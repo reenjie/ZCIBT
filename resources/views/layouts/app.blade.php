@@ -31,7 +31,13 @@
 
             <div class="@if (auth()->check() && request()->route()->getName() != "") main-panel @endif">
                 @if(session()->has('reservation'))
+                    @if(auth()->check())
+                    @include('layouts.navbars.navbar')
+                    @else 
+                    @endif
+
                 @else
+               
                 @include('layouts.navbars.navbar')
                 @endif
                 @yield('content')

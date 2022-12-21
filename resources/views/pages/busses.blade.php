@@ -12,8 +12,12 @@
                             <p class="card-category">Manage Busses Informations</p>
                         </div>
                         <div class="card-body ">
-                          
-                       <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index','addbus')}}' "  >Add <i class="fas fa-plus-circle"></i></button>
+                          @if(Auth::user()->user_type == 3)
+
+                          @else 
+                             <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index','addbus')}}' "  >Add <i class="fas fa-plus-circle"></i></button>
+                          @endif
+                    
                        @if(session()->has('success'))
                        <div class="alert alert-success alert-dismissible fade show" role="alert">
               {{session()->get('success')}}
@@ -32,7 +36,10 @@
       <th scope="col" class="text-dark">Company</th>
       <th scope="col" class="text-dark">Color</th>
       <th scope="col" class="text-dark">Seats</th>
-      <th scope="col" class="text-dark">Action</th>
+      @if(Auth::user()->user_type != 3)
+    <th scope="col" class="text-dark">Action</th>
+      @endif 
+      
     </tr>
   </thead>
   <tbody>
@@ -49,6 +56,8 @@
       <td>{{$item->company}}</td>
       <td>{{$item->color}}</td>
       <td>{{$item->per_column}} x {{$item->per_row}}</td>
+    
+      @if(Auth::user()->user_type != 3)
       <td>
       <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->id])}}' "><i class="fas fa-eye"></i></button>
       {{--   --}}
@@ -57,6 +66,7 @@
         
        
       </td>
+    @endif 
     </tr>
       @endforeach
       @endif

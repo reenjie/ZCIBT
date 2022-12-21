@@ -22,7 +22,14 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('dashboard');
+    {   
+        if(session()->has('reservation')){
+            return redirect()->route('page.index', 'trips');
+        }else {
+            return view('dashboard');
+        }
+
+
+        //
     }
 }
