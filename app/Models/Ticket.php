@@ -16,7 +16,10 @@ class Ticket extends Model
         'routes_id',
         'ts_id',
         'user_id',
+        'discount',
+        'idfile',
         'status',
+        'reason',
         'exp_date'
 
     ];

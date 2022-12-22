@@ -7,16 +7,18 @@
        
             <div class="container">
                 <div class="row ">
-                 <div class="col-md-2"></div>
-                 <div class="col-md-8">
+                 <div class="col-md-1"></div>
+                 <div class="col-md-10">
                  @if($auth==0)
                  <button class="btn btn-warning btn-sm" onclick="window.location.href='/' ">Home</button>
                  @endif
                     <div class="card">
                         <div class="card-body">
                             <h5 style="font-weight:bold">Please provide your personal information:</h5>
+                            @if(!auth()->check())
                             <a href="{{route('login')}}" style="font-size:14px;font-weight:bold">I already have an Account</a>
-                            <form action="{{route('reserveticket')}}" method="post">
+                            @endif
+                            <form action="{{route('reserveticket')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
 
@@ -103,7 +105,41 @@
     </div>
     @endif
     <div class="@if($auth == 1) col-md-12 @else col-md-6 @endif container">
-    <h2 style="float:right">
+    <h2 style="">
+    <span style="font-size:14px">Request Discount</span>
+    <select name="discount"  class="form-control" id="selectdiscount">
+        <option value="">Select Discount</option>
+        @php
+        $discounts = DB::select('SELECT * FROM `fare_discounts`');
+        @endphp
+        @foreach($discounts as $amt )
+            <option value="{{$amt->id}}">{{$amt->title}} | &#8369; {{$amt->discount}}</option>
+        @endforeach
+    </select>
+
+    <span style="font-size:14px">Provide a Valid ID for Approval
+    <br>
+    <span style="font-size:12px">Preferably Government Issued ID .</span>
+    <span style="font-size:12px">
+    <ul class="">
+  <li class="">SSS ID</li>
+  <li class="">Senior Citizen ID</li>
+  <li class="">Drivers License</li>
+  <li class="">Passport</li>
+  <li class="">BirthCertificate</li>
+  <li class="">Student ID</li>
+ 
+</ul>
+
+    </span>
+</span>
+    <input type="file" name="idfile" accept="image/*" id="idfile" class="form-control">
+    <br>
+    <div class="alert alert-warning d-none text-dark" id="alerto">
+        You will be charged a full amount as of now. When your discount request approved. present the discounted ticket to the operators.
+    </div>
+
+    <br>
 <span style="font-size:14px;font-weight:normal">Total Amount Payable :
     
     </span>    <br>
@@ -145,6 +181,7 @@
 </div>
 
 </div>
+<span class="text-danger" style="font-size:13px">No Card information will be saved. This is for development purposes only.</span>
 
 <button type="submit"  class="btn btn-success p-2 px-5" style="float:right">Pay now</button>
 
@@ -155,7 +192,7 @@
                         </div>
                     </div>
                  </div>
-                 <div class="col-md-2"></div>
+                 <div class="col-md-1"></div>
                 </div>
             </div>
         </div>
@@ -171,7 +208,20 @@
                 // after 1000 ms we add the class animated to the login/register card
                 $('.card').removeClass('card-hidden');
             }, 700)
+            
+            $('#selectdiscount').change(function(){
+                var discount = $(this).val();
+                if(discount == ''){
+                    $('#idfile').removeAttr('required');   
+                    $('#alerto').addClass('d-none');
+                    $('#idfile').val('');
+                }else {
+                    $('#idfile').attr('required',true);
+                    $('#alerto').removeClass('d-none');
+                }
+                
 
+            })
 
             $('#paynow').on('submit',function(){
                 swal({

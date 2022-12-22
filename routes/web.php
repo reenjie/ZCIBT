@@ -42,8 +42,12 @@ Route::get('Payment/reserve/tickets',[App\Http\Controllers\TicketController::cla
 Route::post('reserveticket',[App\Http\Controllers\TicketController::class, 'reserve'])->name('reserveticket');
 
 Route::get('changeseat',[App\Http\Controllers\TicketController::class, 'changeseat'])->name('changeseat');
+
+Route::get('mailticket',[App\Http\Controllers\MailController::class, 'mailticket'])->name('mailticket');
+
+Route::get('actiondiscountrequest',[App\Http\Controllers\TicketController::class, 'actiondiscountrequest'])->name('actiondiscountrequest');
 Route::get('Viewing/Bus/Occs',function(Request $request){
-	
+
 	$viewingticket = $request->viewingticket;
 	$reserve = $request->reserve;
 	$tripid =  $request->trip_id;

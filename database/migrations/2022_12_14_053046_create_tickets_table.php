@@ -21,7 +21,10 @@ return new class extends Migration
             $table->integer('routes_id');
             $table->integer('ts_id');
             $table->integer('user_id');
+            $table->integer('discount');
+            $table->text('idfile')->nullable();
             $table->integer('status');
+            $table->text('reason')->nullable();
             $table->integer('exp_date')->nullable();
             $table->timestamps();
         });

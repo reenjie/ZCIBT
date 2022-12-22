@@ -15,7 +15,7 @@
                             <div class="card-body ">
                                 <div class="card-body">
                                     @if(session()->has('success'))
-                                    <div class="alert alert-warning">
+                                    <div class="alert alert-warning text-dark">
                                         {{session()->get('success')}}
                                     </div>
                                     @endif

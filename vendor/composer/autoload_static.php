@@ -17,14 +17,15 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
@@ -32,7 +33,6 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         'a1af1fc0cffb5f61cbaf64dbe030fdb9' => __DIR__ . '/..' . '/laravel/legacy-factories/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
     );
@@ -103,6 +103,7 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'N' => 
         array (
@@ -114,6 +115,7 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         ),
         'L' => 
         array (
+            'League\\OAuth2\\Client\\' => 21,
             'League\\MimeTypeDetection\\' => 25,
             'League\\Flysystem\\' => 17,
             'League\\Config\\' => 14,
@@ -368,6 +370,10 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
@@ -375,6 +381,11 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'League\\OAuth2\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/oauth2-client/src',
+            1 => __DIR__ . '/..' . '/league/oauth2-google/src',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -540,6 +551,8 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         'App\\Http\\Controllers\\EditController' => __DIR__ . '/../..' . '/app/Http/Controllers/EditController.php',
         'App\\Http\\Controllers\\FareDiscounts' => __DIR__ . '/../..' . '/app/Http/Controllers/FareDiscounts.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\MailController' => __DIR__ . '/../..' . '/app/Http/Controllers/MailController.php',
+        'App\\Http\\Controllers\\OauthController' => __DIR__ . '/../..' . '/app/Http/Controllers/OauthController.php',
         'App\\Http\\Controllers\\PageController' => __DIR__ . '/../..' . '/app/Http/Controllers/PageController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\RoutesController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoutesController.php',
@@ -3100,6 +3113,7 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         'League\\Flysystem\\UnixVisibility\\PortableVisibilityConverter' => __DIR__ . '/..' . '/league/flysystem/src/UnixVisibility/PortableVisibilityConverter.php',
         'League\\Flysystem\\UnixVisibility\\VisibilityConverter' => __DIR__ . '/..' . '/league/flysystem/src/UnixVisibility/VisibilityConverter.php',
         'League\\Flysystem\\UnreadableFileEncountered' => __DIR__ . '/..' . '/league/flysystem/src/UnreadableFileEncountered.php',
+        'League\\Flysystem\\UrlGeneration\\ChainedPublicUrlGenerator' => __DIR__ . '/..' . '/league/flysystem/src/UrlGeneration/ChainedPublicUrlGenerator.php',
         'League\\Flysystem\\UrlGeneration\\PrefixPublicUrlGenerator' => __DIR__ . '/..' . '/league/flysystem/src/UrlGeneration/PrefixPublicUrlGenerator.php',
         'League\\Flysystem\\UrlGeneration\\PublicUrlGenerator' => __DIR__ . '/..' . '/league/flysystem/src/UrlGeneration/PublicUrlGenerator.php',
         'League\\Flysystem\\UrlGeneration\\ShardedPrefixPublicUrlGenerator' => __DIR__ . '/..' . '/league/flysystem/src/UrlGeneration/ShardedPrefixPublicUrlGenerator.php',
@@ -3113,6 +3127,35 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
+        'League\\OAuth2\\Client\\Exception\\HostedDomainException' => __DIR__ . '/..' . '/league/oauth2-google/src/Exception/HostedDomainException.php',
+        'League\\OAuth2\\Client\\Grant\\AbstractGrant' => __DIR__ . '/..' . '/league/oauth2-client/src/Grant/AbstractGrant.php',
+        'League\\OAuth2\\Client\\Grant\\AuthorizationCode' => __DIR__ . '/..' . '/league/oauth2-client/src/Grant/AuthorizationCode.php',
+        'League\\OAuth2\\Client\\Grant\\ClientCredentials' => __DIR__ . '/..' . '/league/oauth2-client/src/Grant/ClientCredentials.php',
+        'League\\OAuth2\\Client\\Grant\\Exception\\InvalidGrantException' => __DIR__ . '/..' . '/league/oauth2-client/src/Grant/Exception/InvalidGrantException.php',
+        'League\\OAuth2\\Client\\Grant\\GrantFactory' => __DIR__ . '/..' . '/league/oauth2-client/src/Grant/GrantFactory.php',
+        'League\\OAuth2\\Client\\Grant\\Password' => __DIR__ . '/..' . '/league/oauth2-client/src/Grant/Password.php',
+        'League\\OAuth2\\Client\\Grant\\RefreshToken' => __DIR__ . '/..' . '/league/oauth2-client/src/Grant/RefreshToken.php',
+        'League\\OAuth2\\Client\\OptionProvider\\HttpBasicAuthOptionProvider' => __DIR__ . '/..' . '/league/oauth2-client/src/OptionProvider/HttpBasicAuthOptionProvider.php',
+        'League\\OAuth2\\Client\\OptionProvider\\OptionProviderInterface' => __DIR__ . '/..' . '/league/oauth2-client/src/OptionProvider/OptionProviderInterface.php',
+        'League\\OAuth2\\Client\\OptionProvider\\PostAuthOptionProvider' => __DIR__ . '/..' . '/league/oauth2-client/src/OptionProvider/PostAuthOptionProvider.php',
+        'League\\OAuth2\\Client\\Provider\\AbstractProvider' => __DIR__ . '/..' . '/league/oauth2-client/src/Provider/AbstractProvider.php',
+        'League\\OAuth2\\Client\\Provider\\Exception\\IdentityProviderException' => __DIR__ . '/..' . '/league/oauth2-client/src/Provider/Exception/IdentityProviderException.php',
+        'League\\OAuth2\\Client\\Provider\\GenericProvider' => __DIR__ . '/..' . '/league/oauth2-client/src/Provider/GenericProvider.php',
+        'League\\OAuth2\\Client\\Provider\\GenericResourceOwner' => __DIR__ . '/..' . '/league/oauth2-client/src/Provider/GenericResourceOwner.php',
+        'League\\OAuth2\\Client\\Provider\\Google' => __DIR__ . '/..' . '/league/oauth2-google/src/Provider/Google.php',
+        'League\\OAuth2\\Client\\Provider\\GoogleUser' => __DIR__ . '/..' . '/league/oauth2-google/src/Provider/GoogleUser.php',
+        'League\\OAuth2\\Client\\Provider\\ResourceOwnerInterface' => __DIR__ . '/..' . '/league/oauth2-client/src/Provider/ResourceOwnerInterface.php',
+        'League\\OAuth2\\Client\\Token\\AccessToken' => __DIR__ . '/..' . '/league/oauth2-client/src/Token/AccessToken.php',
+        'League\\OAuth2\\Client\\Token\\AccessTokenInterface' => __DIR__ . '/..' . '/league/oauth2-client/src/Token/AccessTokenInterface.php',
+        'League\\OAuth2\\Client\\Token\\ResourceOwnerAccessTokenInterface' => __DIR__ . '/..' . '/league/oauth2-client/src/Token/ResourceOwnerAccessTokenInterface.php',
+        'League\\OAuth2\\Client\\Tool\\ArrayAccessorTrait' => __DIR__ . '/..' . '/league/oauth2-client/src/Tool/ArrayAccessorTrait.php',
+        'League\\OAuth2\\Client\\Tool\\BearerAuthorizationTrait' => __DIR__ . '/..' . '/league/oauth2-client/src/Tool/BearerAuthorizationTrait.php',
+        'League\\OAuth2\\Client\\Tool\\GuardedPropertyTrait' => __DIR__ . '/..' . '/league/oauth2-client/src/Tool/GuardedPropertyTrait.php',
+        'League\\OAuth2\\Client\\Tool\\MacAuthorizationTrait' => __DIR__ . '/..' . '/league/oauth2-client/src/Tool/MacAuthorizationTrait.php',
+        'League\\OAuth2\\Client\\Tool\\ProviderRedirectTrait' => __DIR__ . '/..' . '/league/oauth2-client/src/Tool/ProviderRedirectTrait.php',
+        'League\\OAuth2\\Client\\Tool\\QueryBuilderTrait' => __DIR__ . '/..' . '/league/oauth2-client/src/Tool/QueryBuilderTrait.php',
+        'League\\OAuth2\\Client\\Tool\\RequestFactory' => __DIR__ . '/..' . '/league/oauth2-client/src/Tool/RequestFactory.php',
+        'League\\OAuth2\\Client\\Tool\\RequiredParameterTrait' => __DIR__ . '/..' . '/league/oauth2-client/src/Tool/RequiredParameterTrait.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
@@ -3404,6 +3447,12 @@ class ComposerStaticInit2a8da41bf1fdc2d65533b339f253d8db
         'NunoMaduro\\Collision\\Provider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Provider.php',
         'NunoMaduro\\Collision\\SolutionsRepositories\\NullSolutionsRepository' => __DIR__ . '/..' . '/nunomaduro/collision/src/SolutionsRepositories/NullSolutionsRepository.php',
         'NunoMaduro\\Collision\\Writer' => __DIR__ . '/..' . '/nunomaduro/collision/src/Writer.php',
+        'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
+        'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',
+        'PHPMailer\\PHPMailer\\OAuthTokenProvider' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuthTokenProvider.php',
+        'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
+        'PHPMailer\\PHPMailer\\POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/POP3.php',
+        'PHPMailer\\PHPMailer\\SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/SMTP.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\ActualValueIsNotAnObjectException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Exception/ActualValueIsNotAnObjectException.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',

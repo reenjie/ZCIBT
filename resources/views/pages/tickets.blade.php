@@ -54,14 +54,17 @@
                        
                         <td >
    @php
- $tickets = DB::select('SELECT t.id,t.column_seat_id ,u.firstname,u.middlename,u.lastname , 
+ $tickets = DB::select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,
+u.firstname,u.middlename,u.lastname , 
 ts.departure,ts.est_arrival,ts.schedule,ts.status as schedulestatus, 
 r.from , r.to,r.fare,
 b.Bus_No,b.seating_capacity,b.company,b.weight,b.color,b.per_column,b.per_row 
+, d.title,d.discount
 from users u inner join tickets t on t.user_id = u.id 
 INNER join travel_schedules ts on ts.id = t.ts_id 
 inner join routes r on r.id = t.routes_id
-INNER JOIN buses b on b.id = t.bus_id where u.id = '.$item->id.' ');
+INNER JOIN buses b on b.id = t.bus_id
+LEFT JOIN fare_discounts d on d.id = t.discount where u.id = '.$item->id.' ');
 
     $user = $item->firstname.' '.$item->lastname;
             @endphp
@@ -99,14 +102,17 @@ INNER JOIN buses b on b.id = t.bus_id where u.id = '.$item->id.' ');
                         @else 
 
                         @php
- $tickets = DB::select('SELECT t.id,t.column_seat_id ,u.firstname,u.middlename,u.lastname , 
+ $tickets = DB::select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile,t.reason ,
+u.firstname,u.middlename,u.lastname , 
 ts.departure,ts.est_arrival,ts.schedule,ts.status as schedulestatus, 
 r.from , r.to,r.fare,
 b.Bus_No,b.seating_capacity,b.company,b.weight,b.color,b.per_column,b.per_row 
+, d.title,d.discount
 from users u inner join tickets t on t.user_id = u.id 
 INNER join travel_schedules ts on ts.id = t.ts_id 
 inner join routes r on r.id = t.routes_id
-INNER JOIN buses b on b.id = t.bus_id where u.id = '.Auth::user()->id.' order by ts.schedule desc ');
+INNER JOIN buses b on b.id = t.bus_id
+LEFT JOIN fare_discounts d on d.id = t.discount where u.id = '.Auth::user()->id.' order by ts.schedule desc ');
 
 $datenow = date('Y-m-d');
             @endphp
@@ -144,6 +150,38 @@ $datenow = date('Y-m-d');
     Estimated Arrival : {{date('h:ia',strtotime($val->est_arrival))}}
     <br>
     Fare : &#8369; {{$val->fare}}
+    <br>
+
+    @if($val->discount > 0)
+       
+            <div class="card">
+                <div class="card-body">
+                    <h6>Discount Request</h6>
+                    @if($val->status == 0)
+                <span class="badge badge-warning">For Approval</span>
+                @elseif($val->status == 1) 
+                <span class="badge badge-success">Approved</span>
+                @else 
+                <span class="badge badge-danger">Disapproved</span>
+                 @endif
+                <br>
+                Title : {{$val->title}}
+                <br>
+                Discount : &#8369; {{$val->discount}}
+     <br>
+     @if($val->status == 1 || $val->status == 2)
+     @if($val->reason)
+   Reason : <span class="text-danger">{{$val->reason}}</span>
+    @endif
+    @else 
+    Your Discount Request is waiting for admin Approval.
+     @endif
+     
+                </div>
+            </div>
+       
+    @endif
+    
     <br>
     
     @if($datenow > $val->schedule)

@@ -131,7 +131,7 @@ $datenow = date('Y-m-d');
 
     
         @else 
-  <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->bus_id,'viewingticket'=>true])}}' "><i class="fas fa-eye"></i></button>
+  <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->bus_id,'trip_id'=>$item->id,'viewingticket'=>true,'authenticathed'=>true])}}' "><i class="fas fa-eye"></i></button>
  
         <button data-id="{{$item->id}}" class="btn btn-link text-danger ml-2  btn-sm delete"><i class="fas fa-trash-can"></i></button>
         
