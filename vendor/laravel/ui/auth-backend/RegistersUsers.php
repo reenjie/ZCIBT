@@ -56,6 +56,7 @@ trait RegistersUsers
         'birthdate'=>$birthdate,
         'user_type'=>3,
         'license_no'=>null,
+        'bus_id'=>0,
         'address'=>$address,
         'contact_no'=>$contactno,
         'fl'=>0,

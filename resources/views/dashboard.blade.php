@@ -69,7 +69,7 @@
         </div>
 
         <br>
-        @if(Auth::user()->user_type == 0)
+        @if(Auth::user()->user_type == 0 || Auth::user()->user_type == 1)
             @php
                 $tickets = DB::Select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,
 u.firstname,u.middlename,u.lastname , 

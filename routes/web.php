@@ -59,16 +59,19 @@ Route::get('Viewing/Bus/Occs',function(Request $request){
 
 	
 	
-	$bus = Bus::where('id',$request->id)->get();
+	$bus = Bus::where('id',$busid)->get();
 
-	$columns = Column_seats::where('bus_id',$request->id)->get();
-	$rows = Row_seats::where('bus_id',$request->id)->get();
+	$columns = Column_seats::where('bus_id',$busid)->get();
+	$rows = Row_seats::where('bus_id',$busid)->get();
 
 	
+	if($tripid){
+$ts_id = trip::findorFail($tripid)->TS_id;
 	
-	$ts_id = trip::findorFail($tripid)->TS_id;
-
-
+	}else{
+		$ts_id=0;
+	}
+	
 
 	return view('viewbus',compact('columns','rows','busid','viewingticket','bus','reserve','tripid','authenticathed','ts_id'));
 })->name('viewbus');

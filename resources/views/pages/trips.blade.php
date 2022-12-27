@@ -43,7 +43,19 @@
   <tbody>
  
    @php
-      $data = DB::select('select 
+
+   if(Auth::user()->user_type == 1){
+    $data = DB::select('select 
+b.Bus_No,b.seating_capacity,b.company,b.color,
+s.departure,s.est_arrival,s.schedule,s.status,
+r.from,r.to,r.fare,
+t.created_at as tripcreated,t.bus_id,t.routes_id,t.TS_id,t.id
+from buses b 
+INNER join trips t on b.id = t.bus_id 
+INNER join travel_schedules s on t.TS_id = s.id
+inner join routes r on t.routes_id = r.id where b.id='.Auth::user()->bus_id.' order by s.schedule desc ');
+   }else {
+    $data = DB::select('select 
 b.Bus_No,b.seating_capacity,b.company,b.color,
 s.departure,s.est_arrival,s.schedule,s.status,
 r.from,r.to,r.fare,
@@ -52,6 +64,8 @@ from buses b
 INNER join trips t on b.id = t.bus_id 
 INNER join travel_schedules s on t.TS_id = s.id
 inner join routes r on t.routes_id = r.id order by s.schedule desc;');
+   }
+    
 
 
 $datenow = date('Y-m-d');

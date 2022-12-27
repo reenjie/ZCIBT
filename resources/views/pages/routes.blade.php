@@ -23,8 +23,12 @@
                        
                         @if(Auth::user()->user_type != 3)
      <button onclick="window.location.href='{{route('page.index','addroutes')}}' " class="btn btn-warning btn-sm">Add <i class="fas fa-plus-circle"></i></button>
-                        <button class="btn btn-primary btn-sm"  onclick="window.location.href='{{route('page.index','farediscounts')}}' " >Fare Discounts <i class="fas fa-cogs"></i></button>
-                          @endif 
+                    @if(Auth::user()->user_type !=1)
+                    <button class="btn btn-primary btn-sm"  onclick="window.location.href='{{route('page.index','farediscounts')}}' " >Fare Discounts <i class="fas fa-cogs"></i></button>
+     
+                    @endif
+                       
+     @endif 
                         <div class="table-responsive">
                         <table class="table table-striped">
                     <thead class="">

@@ -81,8 +81,8 @@ Tip 2: you can also add an image using data-image tag
                     <p>{{ __("Tickets") }}</p>
                 </a>
             </li>
-
-            @if(Auth::user()->user_type !=3)
+           
+            @if(Auth::user()->user_type !=3 && Auth::user()->user_type !=1)
             <li class="nav-item @if($activePage == 'users') active @endif">
                 <a class="nav-link" href="{{route('page.index', 'users')}}">
                     <i class="nc-icon nc-circle-09"></i>

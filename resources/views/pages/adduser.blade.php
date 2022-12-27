@@ -29,15 +29,34 @@
                         <div class="container mt-5" style="">
 
                                                      <div class=" row">
-                                                     <div class="col-md-12">
+                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                 <h6 class="text-secondary">User Role</h6>
-                                               <select name="user_type" class="form-control" id="" required autofocus>
+                                               <select name="user_type" class="form-control" id="role" required autofocus>
                                                 <option value="">Select User Role</option>
                                                 <option value="0">Administrator</option>
                                                 <option value="1">Operator</option>
                                                </select>
                                                         </div>
+
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                        <div class="form-group">
+                                                <h6 class="text-secondary">Select Bus</h6>
+                                               <select name="bus_id" class="form-control" disabled id="bus" required autofocus>
+                                                <option value="">Select Bus</option>
+                                                @php
+                                                $bus = DB::select('select * from buses');
+                                                @endphp
+
+                                                @foreach($bus as $row)
+                                                    <option value="{{$row->id}}">#{{$row->Bus_No}} -- {{$row->color}} -- {{$row->company}}</option>
+                                                @endforeach
+                                               </select>
+                                                        </div>
+
+                                                        
                                                         </div>
                                                         <div class="col-md-4">
                                                         <div class="form-group">
@@ -127,5 +146,16 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
+    <script>
+        $('#role').change(function(){
+            var val = $(this).val();
+            if(val == 1){
+                $('#bus').removeAttr('disabled').attr('required',true);   
+           
+            }else {
+                $('#bus').removeAttr('required').attr('disabled',true);   
+            
+            }
+        })
+    </script>
 @endsection

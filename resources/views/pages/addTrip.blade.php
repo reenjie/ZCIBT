@@ -30,14 +30,22 @@
                             <div class="col-md-4">
                                 <h6>Select Bus</h6>
                            @php
-                                $bus = DB::select('SELECT * FROM `buses`');
+                           if(Auth::user()->user_type == 1){
+                            $bus = DB::select('SELECT * FROM `buses` WHERE id = '.Auth::user()->bus_id.' ');
 
+                           }else{
+                            $bus = DB::select('SELECT * FROM `buses`');
+
+                           }
+                               
                                 @endphp 
                              
                                 <select name="bus" class="form-control" required>
+                                    @if(Auth::user()->user_type != 1)
                                     <option value="">Select Bus</option>
+                                    @endif
                                     @foreach($bus as $value)
-                                    <option value="{{$value->id}}">{{$value->Bus_No}}</option>
+                                    <option value="{{$value->id}}">#{{$value->Bus_No}} -- {{$value->color}} -- {{$value->company}}</option>
                                     @endforeach
                                 </select>
 

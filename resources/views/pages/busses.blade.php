@@ -12,7 +12,7 @@
                             <p class="card-category">Manage Busses Informations</p>
                         </div>
                         <div class="card-body ">
-                          @if(Auth::user()->user_type == 3)
+                          @if(Auth::user()->user_type == 3 || Auth::user()->user_type == 1)
 
                           @else 
                              <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index','addbus')}}' "  >Add <i class="fas fa-plus-circle"></i></button>
@@ -36,7 +36,7 @@
       <th scope="col" class="text-dark">Company</th>
       <th scope="col" class="text-dark">Color</th>
       <th scope="col" class="text-dark">Seats</th>
-      @if(Auth::user()->user_type != 3)
+      @if(Auth::user()->user_type != 3 )
     <th scope="col" class="text-dark">Action</th>
       @endif 
       
@@ -50,20 +50,29 @@
       
       @if(count($data)>=1)
       @foreach($data as $item)
-      <tr>
-      <td style="font-weight:bold">{{$item->Bus_No}}</td>
+      
+      <tr class="  @if(Auth::user()->bus_id == $item->id)
+    table-primary
+@endif">
+      <td style="font-weight:bold">{{$item->Bus_No}}
+      <br>
+      @if(Auth::user()->bus_id == $item->id)
+      <span class="badge badge-danger">My Bus</span>
+@endif
+    </td>
       <td>{{$item->seating_capacity}}</td>
       <td>{{$item->company}}</td>
       <td>{{$item->color}}</td>
       <td>{{$item->per_column}} x {{$item->per_row}}</td>
     
-      @if(Auth::user()->user_type != 3)
+      @if(Auth::user()->user_type != 3 )
       <td>
-      <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->id,'authenticathed'=>true,'trip_id'=>1])}}' "><i class="fas fa-eye"></i></button>
+      <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->id])}}' "><i class="fas fa-eye"></i></button>
       {{--   --}}
+        @if(Auth::user()->user_type !=1)
         <button onclick="window.location.href='{{route('edit',['type'=>'bus','id'=>$item->id,'data'=>$data ])}}' " class="btn btn-link text-success btn-sm"><i class="fas fa-edit"></i></button>
         <button data-id="{{$item->id}}" class="btn btn-link text-danger ml-2  btn-sm delete"><i class="fas fa-trash-can"></i></button>
-        
+        @endif
        
       </td>
     @endif 

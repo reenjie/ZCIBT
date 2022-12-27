@@ -24,6 +24,7 @@ class User extends Authenticatable
         'birthdate',
         'user_type',
         'license_no',
+        'bus_id',
         'address',
         'contact_no',
         'fl',

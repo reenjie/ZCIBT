@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,12 @@ class HomeController extends Controller
     public function index()
     {   
         if(session()->has('reservation')){
-            return redirect()->route('page.index', 'trips');
+                if(Auth::user()->user_type == 1 || Auth::user()->user_type == 0){
+                    return view('dashboard');
+                }else{
+                    return redirect()->route('page.index', 'trips');
+                }
+           
         }else {
             return view('dashboard');
         }

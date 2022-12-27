@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'birthdate'=>now(),
             'user_type'=>0,
             'license_no'=>null,
+            'bus_id'=>0,
             'address'=>'',
             'contact_no'=>'',
             'fl'=>0,

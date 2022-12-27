@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('birthdate');
             $table->integer('user_type')->comment('0= Admin , 1=Operator ,3= user');
             $table->text('license_no')->nullable();
+            $table->integer('bus_id');
             $table->text('address');
             $table->text('contact_no');
             $table->integer('fl');

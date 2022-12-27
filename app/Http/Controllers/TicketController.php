@@ -131,6 +131,7 @@ class TicketController extends Controller
                 'birthdate'=>$birthdate,
                 'user_type'=>3,
                 'license_no'=>null,
+                'bus_id'=>0,
                 'address'=>$address,
                 'contact_no'=>$contactno,
                 'fl'=>0,
@@ -180,6 +181,7 @@ class TicketController extends Controller
         
                 //return redirect()->route('login')->with('success','Your Ticket was Reserved Successfully!. For more information or ticket cancellation Please Login into your account . Note : No Credit Card Account information was saved, it is for development purpose only. ');
            } catch (\Throwable $th) {
+           // return $th;
                 echo 'Email Entered already exist in our database. please use a unique Email!';
            } 
     

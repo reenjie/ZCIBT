@@ -31,7 +31,11 @@ class UserController extends Controller
         $email     = $request->email;
         $password  = $request->password;
         $password_confirmation = $request->password_confirmation;
-
+        if($request->bus_id){
+            $bus_id = $request->bus_id;
+        }else{
+            $bus_id = 0;
+        }
 
         $this->validate($request, [
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
@@ -46,10 +50,11 @@ class UserController extends Controller
         'birthdate'=>$birthdate,
         'user_type'=>$usertype,
         'license_no'=>null,
+        'bus_id'=>$bus_id,
         'address'=>$address,
         'contact_no'=>$contactno,
         'fl'=>0,
-        'vrfy'=>0,
+        'vrfy'=>1,
         'status'=>0,
         'email'=>$email,
         'password'=>Hash::make($password),
