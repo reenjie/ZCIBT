@@ -9,7 +9,21 @@
                         <div class="card-header">
                             <h6>Users</h6>
                         </div>
-                        <div class="card-body">
+                        
+                        <div class="card-body ">
+                            <button class="btn btn-warning btn-sm" onclick="window.location.href='{{route('page.index', 'adduser')}}' "><i class="fas fa-plus-circle"></i> Add</button>
+
+                            @if(session()->has('success'))
+                       <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{session()->get('success')}}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                      @endif
+                            <div class="table-responsive">
+
+                            
                         <table class="table table-sm text-dark" style="font-size:14px">
                         <thead>
                             <tr class="table-danger ">
@@ -61,6 +75,8 @@
                             @endforeach
                         </tbody>
                         </table>
+
+                        </div>
                         </div>
                     </div>
                 </div>

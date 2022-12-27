@@ -45,6 +45,8 @@ Route::get('changeseat',[App\Http\Controllers\TicketController::class, 'changese
 
 Route::get('mailticket',[App\Http\Controllers\MailController::class, 'mailticket'])->name('mailticket');
 
+Route::post('createnewuser',[App\Http\Controllers\UserController::class, 'createnewuser'])->name('createnewuser');
+
 Route::get('actiondiscountrequest',[App\Http\Controllers\TicketController::class, 'actiondiscountrequest'])->name('actiondiscountrequest');
 Route::get('Viewing/Bus/Occs',function(Request $request){
 
