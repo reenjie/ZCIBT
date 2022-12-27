@@ -3,7 +3,15 @@
 @section('content')
     <div class="content">
         <div class="container-fluid">
+            @php
+                $revenue = DB::select('select r.fare, sum(r.fare) as total from tickets t INNER JOIN routes r on r.id = t.routes_id group by fare');    
 
+                $sold = DB::select('select * from tickets');
+
+                $users = DB::select('select * from users');
+
+                $request = DB::select('select * from tickets where idfile !="" and status !=0 and discount !=0 ');
+            @endphp
         <div class="row">
             <div class="col-md-3">
                 <div class="card" style="border-left:5px solid #279ec8">
@@ -12,7 +20,11 @@
                             <i style="font-size:45px" class="fas fa-money text-secondary"></i>
                             </div>
                         <div style="font-weight:bold" class="text-info">Revenue</div>
-                        <span style="font-size:20px">&#8369; 500</span>
+                        <span style="font-size:20px">&#8369; 
+                        @foreach ($revenue as $total)
+                                {{$total->total}}
+                        @endforeach
+                        </span>
                     </div>
                 </div>
             </div>
@@ -24,7 +36,7 @@
                             <i style="font-size:45px" class="fas fa-ticket text-secondary"></i>
                             </div>
                         <div style="font-weight:bold;color:#db8142" class="">Ticket Sold</div>
-                        <span style="font-size:20px">1500</span>
+                        <span style="font-size:20px">{{count( $sold )}}</span>
                     </div>
                 </div>
             </div>
@@ -37,7 +49,7 @@
                             <i style="font-size:45px" class="fas fa-users text-secondary"></i>
                             </div>
                         <div style="font-weight:bold;color:#063d76" class="">Users</div>
-                        <span style="font-size:20px">1500</span>
+                        <span style="font-size:20px">{{count($users)}}</span>
                     </div>
                 </div>
             </div>
@@ -50,7 +62,7 @@
                             <i style="font-size:45px" class="fas fa-bell text-secondary"></i>
                             </div>
                         <div style="font-weight:bold;color:#c43d4f" class="">Request</div>
-                        <span style="font-size:20px">1</span>
+                        <span style="font-size:20px">{{count($request)}}</span>
                     </div>
                 </div>
             </div>
@@ -262,12 +274,12 @@ var chart = new CanvasJS.Chart("chartContainer", {
 });
 
 @php
-        $graphdata = DB::select('select count(id) as tickets, created_at from tickets group by created_at');
+        $graphdata = DB::select('select count(id) as tickets, date(created_at) as created_at from tickets group by created_at');
 
     @endphp
     @foreach($graphdata as $dd)
     dataPoints.push({
-			x: new Date({{strtotime($dd->created_at)}}),
+			x: new Date({{$dd->created_at}}),
 			y: {{$dd->tickets}}
 		});
     @endforeach
