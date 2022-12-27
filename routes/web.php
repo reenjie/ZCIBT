@@ -48,18 +48,24 @@ Route::get('mailticket',[App\Http\Controllers\MailController::class, 'mailticket
 Route::get('actiondiscountrequest',[App\Http\Controllers\TicketController::class, 'actiondiscountrequest'])->name('actiondiscountrequest');
 Route::get('Viewing/Bus/Occs',function(Request $request){
 
+
+	$busid = $request->id;
 	$viewingticket = $request->viewingticket;
 	$reserve = $request->reserve;
 	$tripid =  $request->trip_id;
 	$authenticathed = $request->authenticathed;
 
+	
+	
 	$bus = Bus::where('id',$request->id)->get();
-	$busid = $request->id;
+
 	$columns = Column_seats::where('bus_id',$request->id)->get();
 	$rows = Row_seats::where('bus_id',$request->id)->get();
 
 	
+	
 	$ts_id = trip::findorFail($tripid)->TS_id;
+
 
 
 	return view('viewbus',compact('columns','rows','busid','viewingticket','bus','reserve','tripid','authenticathed','ts_id'));
@@ -74,7 +80,7 @@ Route::get('viewusertickets',function(Request $request){
 	$userid = $request->id;
 	$user   = $request->user;
 
-	return view('pages.viewtickets',compact('userid','user'));
+	return view('pages.viewtickets',compact('userid','user')); 
 
 })->name('viewusertickets');
 

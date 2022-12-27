@@ -33,7 +33,11 @@ class TicketController extends Controller
         ];
         session(['reservation'=>$data]);    
 
-        return view('payment',compact('auth'));
+        $fare = DB::select('select fare from routes where id = (select routes_id from trips where id = '.$tripid.') ');
+
+       
+
+        return view('payment',compact('auth','fare'));
 
     }
 

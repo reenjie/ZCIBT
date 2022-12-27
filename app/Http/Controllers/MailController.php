@@ -121,7 +121,7 @@ class MailController extends Controller
     public function mailticket(Request $request){
        $id = $request->ticketID;
        
-       
+    
         if(auth()->check()){
             $userid =Auth::user()->id;
         }else {

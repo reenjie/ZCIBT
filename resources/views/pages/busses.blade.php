@@ -59,7 +59,7 @@
     
       @if(Auth::user()->user_type != 3)
       <td>
-      <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->id])}}' "><i class="fas fa-eye"></i></button>
+      <button class="btn btn-link text-secondary btn-sm" onclick="window.location.href='{{route('viewbus',['id'=>$item->id,'authenticathed'=>true,'trip_id'=>1])}}' "><i class="fas fa-eye"></i></button>
       {{--   --}}
         <button onclick="window.location.href='{{route('edit',['type'=>'bus','id'=>$item->id,'data'=>$data ])}}' " class="btn btn-link text-success btn-sm"><i class="fas fa-edit"></i></button>
         <button data-id="{{$item->id}}" class="btn btn-link text-danger ml-2  btn-sm delete"><i class="fas fa-trash-can"></i></button>

@@ -143,7 +143,11 @@
 <span style="font-size:14px;font-weight:normal">Total Amount Payable :
     
     </span>    <br>
-&#8369; 1600</h2>
+&#8369; 
+    @foreach ($fare as $f)
+        {{$f->fare}}
+    @endforeach
+</h2>
 
 
 

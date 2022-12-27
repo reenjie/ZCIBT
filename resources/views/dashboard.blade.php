@@ -148,6 +148,7 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.status = 0 and t.discoun
 
   
 </ul>
+
                 </div>
              </div>
             @endif
@@ -158,6 +159,7 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.status = 0 and t.discoun
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         
         </div>
+
     </div>
     <script>
        $('#confirm').click(function(){
@@ -245,36 +247,38 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	theme: "light2",
 	title: {
-		text: "Daily Sales Data"
+		text: "Daily Tickets Sales Data"
 	},
 	axisY: {
-		title: "Units",
+		title: "Tickets",
 		titleFontSize: 24,
 		includeZero: true
 	},
 	data: [{
 		type: "column",
-		yValueFormatString: "#,### Units",
+		yValueFormatString: "#,### Tickets",
 		dataPoints: dataPoints
 	}]
 });
 
-function addData(data) {
-	for (var i = 0; i < data.length; i++) {
-		dataPoints.push({
-			x: new Date(data[i].date),
-			y: data[i].units
+@php
+        $graphdata = DB::select('select count(id) as tickets, created_at from tickets group by created_at');
+
+    @endphp
+    @foreach($graphdata as $dd)
+    dataPoints.push({
+			x: new Date({{strtotime($dd->created_at)}}),
+			y: {{$dd->tickets}}
 		});
-	}
+    @endforeach
 	chart.render();
 
-}
 
-$.getJSON("https://canvasjs.com/data/gallery/javascript/daily-sales-data.json", addData);
 
 }
 </script>
 @endsection
+
 
 @push('js')
     <script type="text/javascript">
