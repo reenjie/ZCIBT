@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'tickets', 'title' => 'ZCIBT', 'navName' => 'Tickets', 'activeButton' => 'laravel'])
+    @extends('layouts.app', ['activePage' => 'tickets', 'title' => 'ZCIBT', 'navName' => 'Tickets', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -22,6 +22,8 @@ INNER join travel_schedules ts on ts.id = t.ts_id
 inner join routes r on r.id = t.routes_id
 INNER JOIN buses b on b.id = t.bus_id
 LEFT JOIN fare_discounts d on d.id = t.discount where u.id = '.$userid.' ');
+
+$datenow = date('Y-m-d');
             @endphp
             <ul class="list-group list-group-flush">
                 @foreach($tickets as $val)
@@ -66,6 +68,8 @@ LEFT JOIN fare_discounts d on d.id = t.discount where u.id = '.$userid.' ');
            <span class="badge badge-warning">For Approval</span>
            @elseif($val->status == 1) 
                 <span class="badge badge-success">Approved</span>
+                @elseif($val->status == 2)
+                <span class="badge badge-success">Approved</span>
                 @else 
                 <span class="badge badge-danger">Disapproved</span>
             @endif
@@ -86,6 +90,23 @@ LEFT JOIN fare_discounts d on d.id = t.discount where u.id = '.$userid.' ');
        </div>
   
 @endif
+
+
+
+    
+    @if($datenow > $val->schedule)
+    <div class="card">
+        <div class="card-body">
+            <span class="badge badge-danger">Expired</span>
+     <br>
+
+     @if(Auth::user()->user_type != 1 && Auth::user()->user_type != 0)
+        If you have used this ticket Ignore this message. <br> If you have`nt used this ticket. Contact Administration for a Refund or Another Reservation.
+    @endif
+        </div>
+    </div>
+    @endif
+
   
     </li>
                 @endforeach

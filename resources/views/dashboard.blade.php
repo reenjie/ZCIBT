@@ -71,7 +71,7 @@
         <br>
         @if(Auth::user()->user_type == 0 || Auth::user()->user_type == 1)
             @php
-                $tickets = DB::Select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,
+                $tickets = DB::Select('SELECT t.id,t.idfile,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,
 u.firstname,u.middlename,u.lastname , 
 ts.departure,ts.est_arrival,ts.schedule,ts.status as schedulestatus, 
 r.from , r.to,r.fare,
@@ -147,8 +147,12 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.status = 0 and t.discoun
     @endif
 <br>
     @if($val->status == 0)
+    <a href="{{asset('attachments').'/'.$val->idfile}}" target="_blank">{{$val->idfile}} <i class="fas fa-file"></i></a>
+    <br><br>
 <button class="btn btn-primary btn-sm mt-2" data-id="{{$val->id}}" id="confirm">CONFIRM</button>
 <button class="btn btn-danger btn-sm mt-2 ml-2" data-id="{{$val->id}}" id="decline">DECLINE</button>
+
+
     @endif
            </div>
        </div>

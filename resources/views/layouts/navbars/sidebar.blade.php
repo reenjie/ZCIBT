@@ -11,6 +11,15 @@ Tip 2: you can also add an image using data-image tag
                 <br>
                 <span style="font-size:11px;">Zamboanga City Integrated Bus Terminal</span>
             </a>
+            <span class="badge badge-success">
+            @if(Auth::user()->user_type == 1)
+            Operator
+            @elseif(Auth::user()->user_type == 0)
+            Administrator
+            @else 
+                User
+            @endif
+             | <span style="text-transform:uppercase">{{Auth::user()->firstname}}</span></span>
         </div>
         <ul class="nav">
             <li class="nav-item @if($activePage == 'dashboard') active @endif">
@@ -91,7 +100,16 @@ Tip 2: you can also add an image using data-image tag
             </li>
 
             @endif
-        
+                
+            @if(Auth::user()->user_type == 1)
+            <li class="nav-item @if($activePage == 'passengers') active @endif">
+                <a class="nav-link" href="{{route('page.index', 'passengers')}}">
+                    <i class="nc-icon nc-circle-09"></i>
+                    <p>{{ __("Passengers") }}</p>
+                </a>
+            </li>
+
+            @endif
         </ul>
     </div>
 </div>
