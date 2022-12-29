@@ -171,7 +171,6 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.status = 0 and t.discoun
             
         @endif
         <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         
         </div>
@@ -255,41 +254,46 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.status = 0 and t.discoun
     })
 </script>
     <script>
-window.onload = function() {
 
-var dataPoints = [];
+window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
+	exportEnabled: true,
 	animationEnabled: true,
-	theme: "light2",
-	title: {
-		text: "Daily Tickets Sales Data"
+	title:{
+		text: "Daily Ticket Sales"
 	},
-	axisY: {
-		title: "Tickets",
-		titleFontSize: 24,
-		includeZero: true
+	legend:{
+		cursor: "pointer",
+		itemclick: explodePie
 	},
 	data: [{
-		type: "column",
-		yValueFormatString: "#,### Tickets",
-		dataPoints: dataPoints
-	}]
-});
-
-@php
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "{name}: <strong>{y} tickets</strong>",
+		indexLabel: "{name} - {y} tickets",
+		dataPoints: [
+            @php
         $graphdata = DB::select('select count(id) as tickets, date(created_at) as created_at from tickets group by created_at');
 
     @endphp
     @foreach($graphdata as $dd)
-    dataPoints.push({
-			x: new Date({{$dd->created_at}}),
-			y: {{$dd->tickets}}
-		});
+    { y: {{$dd->tickets}}, name: "{{$dd->created_at}}" },
     @endforeach
-	chart.render();
+			
+		]
+	}]
+});
+chart.render();
+}
 
-
+function explodePie (e) {
+	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+	} else {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+	}
+	e.chart.render();
 
 }
 </script>

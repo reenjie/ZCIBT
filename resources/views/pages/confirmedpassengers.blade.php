@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'passengers', 'title' => 'ZCIBT', 'navName' => 'Manage Passenger', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'confirmedpassengers', 'title' => 'ZCIBT', 'navName' => 'Confirm Passenger', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -7,22 +7,11 @@
                 <div class="col-md-12">
                     <div class="card strpied-tabled-with-hover">
                         <div class="card-header ">
-                        <h4 class="card-title"> Manage Passenger Tickets</h4>
+                        <h4 class="card-title"> Confirmed Passenger Tickets <i class="fas fa-check-circle text-success"></i></h4>
                         <p class="card-category">Tickets Confirmation</p>
                         </div>
                         <div class="card-body ">
-                            <button class="btn btn-primary btn-sm" onclick="window.location.href='{{route('page.index', 'confirmedpassengers')}}' ">View Confirmed Tickets</button>
-                        
-                        @if(session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                   {{session()->get('success')}}
-                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                             <span aria-hidden="true">&times;</span>
-                           </button>
-                         </div>
-                           @endif
-                      
-
+                        <button class="btn btn-dark btn-sm" onclick="window.location.href='{{route('page.index', 'passengers')}}'">Back</button>
                      
 
                         @php
@@ -38,7 +27,7 @@ from users u inner join tickets t on t.user_id = u.id
 INNER join travel_schedules ts on ts.id = t.ts_id 
 inner join routes r on r.id = t.routes_id
 INNER JOIN buses b on b.id = t.bus_id
-LEFT JOIN fare_discounts d on d.id = t.discount where t.bus_id = '.Auth::user()->bus_id.' and ts.schedule >= '.$datenow.' and t.status in (0,1)   order by ts.schedule desc');
+LEFT JOIN fare_discounts d on d.id = t.discount where t.bus_id = '.Auth::user()->bus_id.' and t.status =3   order by ts.schedule desc');
 
             @endphp
 
