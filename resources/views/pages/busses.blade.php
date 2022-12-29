@@ -51,10 +51,13 @@
       @if(count($data)>=1)
       @foreach($data as $item)
       
-      <tr class="  @if(Auth::user()->bus_id == $item->id)
-    table-primary
-@endif">
-      <td style="font-weight:bold">{{$item->Bus_No}}
+      <tr class="  ">
+      <td style="font-weight:bold">
+      @if(Auth::user()->bus_id == $item->id)
+    <span class="text-primary">{{$item->Bus_No}}</span>
+    @else<span >{{$item->Bus_No}}</span>
+@endif
+      
       <br>
       @if(Auth::user()->bus_id == $item->id)
       <span class="badge badge-danger">My Bus</span>
