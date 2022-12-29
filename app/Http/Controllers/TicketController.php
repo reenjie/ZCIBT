@@ -243,4 +243,15 @@ class TicketController extends Controller
         ]);
       }
     }
+
+    public function confirm(Request $request){
+        $id = $request->id;
+
+        Ticket::where('id',$id)->update([
+            'status'=>3,
+           
+        ]);
+
+        return redirect()->route('page.index', 'passengers')->with('success','Confirmed Successfully!');
+    }
 }

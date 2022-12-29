@@ -11,6 +11,16 @@
                         <p class="card-category">Tickets Confirmation</p>
                         </div>
                         <div class="card-body ">
+
+                        
+                        @if(session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                   {{session()->get('success')}}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                             <span aria-hidden="true">&times;</span>
+                           </button>
+                         </div>
+                           @endif
                       
 
                      
@@ -28,13 +38,17 @@ from users u inner join tickets t on t.user_id = u.id
 INNER join travel_schedules ts on ts.id = t.ts_id 
 inner join routes r on r.id = t.routes_id
 INNER JOIN buses b on b.id = t.bus_id
-LEFT JOIN fare_discounts d on d.id = t.discount where t.bus_id = '.Auth::user()->bus_id.' and date(ts.schedule) > date('.$datenow.')  order by ts.schedule desc ');
+LEFT JOIN fare_discounts d on d.id = t.discount where t.bus_id = '.Auth::user()->bus_id.' and ts.schedule >= '.$datenow.' and t.status in (0,1)   order by ts.schedule desc');
 
             @endphp
+
+           
             <ul class="list-group list-group-flush">
                 @foreach($tickets as $val)
 
-                <li class="list-group-item bg-light mb-2 shadow-lg" style="font-size:12px;border-left:5px solid #66cbdf;border-radius:5px">
+              
+
+                <li class="list-group-item bg-light mb-2 shadow-lg" id="exp{{$val->id}}" style="font-size:12px;border-left:5px solid #66cbdf;border-radius:5px">
   <div style="float:right;font-size:12px;font-weight:normal">
   
     Bus No: {{$val->Bus_No}}
@@ -77,7 +91,7 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.bus_id = '.Auth::user()-
                 <span class="badge badge-warning">For Approval</span>
                 @elseif($val->status == 1) 
                 <span class="badge badge-success">Approved</span>
-                @elseif($val->status == 2)
+                @elseif($val->status == 3)
                 <span class="badge badge-success">Approved</span>
                 @else 
                 <span class="badge badge-danger">Disapproved</span>
@@ -104,18 +118,25 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.bus_id = '.Auth::user()-
        
     @endif
     
-    @if($val->status == 1)
-    <button class="btn btn-success btn-sm">Confirm <i class="fas fa-check-circle"></i></button>
+    @if($val->status == 1 || $val->status == 0)
+    <button class="btn btn-success btn-sm confirm" data-id="{{$val->id}}">Confirm <i class="fas fa-check-circle"></i></button>
      @endif
     <br>
     
     @if($datenow > $val->schedule)
+        
     <div class="card">
         <div class="card-body">
             <span class="badge badge-danger">Expired</span>
      <br>
+        @if(Auth::user()->user_type != 1  )
         If you have used this ticket Ignore this message. <br> If you have`nt used this ticket. Contact Administration for a Refund or Another Reservation.
+        @else 
 
+        <script>
+            $('#exp{{$val->id}}').addClass('d-none');
+        </script>
+        @endif
         </div>
     </div>
     @endif
@@ -135,4 +156,23 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.bus_id = '.Auth::user()-
             </div>
         </div>
     </div>
+
+    <script>
+        $('.confirm').click(function(){
+            var id = $(this).data('id');
+
+            swal({
+            title: "Are you sure?",
+            text: "Please make sure passenger is onboard before confirming..",
+            icon: "info",
+            buttons: true,
+            dangerMode: false,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.location.href="{{route('confirm')}}?id="+id;
+            } 
+            });
+        })
+    </script>
 @endsection

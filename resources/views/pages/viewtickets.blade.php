@@ -68,7 +68,7 @@ $datenow = date('Y-m-d');
            <span class="badge badge-warning">For Approval</span>
            @elseif($val->status == 1) 
                 <span class="badge badge-success">Approved</span>
-                @elseif($val->status == 2)
+                @elseif($val->status == 3)
                 <span class="badge badge-success">Approved</span>
                 @else 
                 <span class="badge badge-danger">Disapproved</span>
