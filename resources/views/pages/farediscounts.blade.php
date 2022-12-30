@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="card strpied-tabled-with-hover">
                         <div class="card-header ">
-                            <button class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('page.index', 'routes')}}' ">back</button>
+                            <button class="btn btn-secondary btn-sm" onclick="window.location.href='{{route('page.index', 'travelroutes')}}' ">back</button>
                             <h4 class="card-title">All Fare Discounts</h4>
                             <p class="card-category">Manage Discount Amounts</p>
                         </div>

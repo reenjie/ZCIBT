@@ -63,8 +63,8 @@ Tip 2: you can also add an image using data-image tag
                     <p>{{ __("Busses") }}</p>
                 </a>
             </li>
-            <li class="nav-item @if($activePage == 'routes') active @endif">
-                <a class="nav-link" href="{{route('page.index', 'routes')}}">
+            <li class="nav-item @if($activePage == 'travelroutes') active @endif">
+                <a class="nav-link" href="{{route('page.index', 'travelroutes')}}">
                     <i class="nc-icon nc-square-pin"></i>
                     <p>{{ __("Routes") }}</p>
                 </a>

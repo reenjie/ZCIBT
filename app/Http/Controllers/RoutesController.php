@@ -48,7 +48,7 @@ class RoutesController extends Controller
     
          ]);
          
-        return redirect()->route('page.index', 'routes')->with('success','Saved Successfully!');
+        return redirect()->route('page.index', 'travelroutes')->with('success','Saved Successfully!');
     }
 
     /**
