@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'schedules', 'title' => 'Add Schedule', 'navName' => 'Busses', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'schedules', 'title' => 'Add Schedule', 'navName' => 'Add Schedule', 'activeButton' => 'laravel'])
 
 @section('content')
 
@@ -9,7 +9,7 @@
                     <div class="card strpied-tabled-with-hover">
                         <div class="card-header ">
                             <button class="btn btn-warning btn-sm " onclick="window.location.href='{{route('page.index', 'schedules')}}' "><i class="fas fa-arrow-left"></i> Back</button>
-                            <h4 class="card-title mt-3">Add Bus</h4>
+                            <h4 class="card-title mt-3">Add Schedule</h4>
                            
                         </div>
                         <div class="card-body ">
@@ -39,6 +39,16 @@
           <h6 style="font-size:13px">Estimated Arrival</h6>
           <input type="time" class="form-control mb-2" required name="arrival" required>
           </div>
+
+          <div class="col-md-6">
+            <h6 style="font-size:13px">Estimated Travel Time</h6>
+            <input type="text" placeholder="Number of Hours or Minutes " class="form-control mb-2" name="esttraveltime" required name="arrival" required>
+            </div>
+
+            <div class="col-md-6">
+                <h6 style="font-size:13px">Remarks</h6>
+               <textarea name="remarks" class="form-control" placeholder="Put remarks here .." id="" style="height: 200px"></textarea>
+                </div>
 
         
 

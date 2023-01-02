@@ -46,7 +46,7 @@ class BusController extends Controller
 
      
 
-            $b = Bus::create([
+           $b = Bus::create([
                 'Bus_No'=>$busnumb,
                 'seating_capacity'=>$seatcapacity,
                 'company'=>$company,
@@ -58,34 +58,46 @@ class BusController extends Controller
 
           $newbusid =  $b->id;
 
+            $seats = $perrow * $percolumn;
             //save row seats
             for ($i=1; $i <= $perrow ; $i++) { 
-                $row =  Row_seats::create([
+               $row =  Row_seats::create([
                     'bus_id'=>$newbusid,
                     'row'=>$i,
                 ]);
 
-                $rowid[] = $row->id;
+               $rowid[] = $row->id;
+
+
+            }
+
+            
+            $count = 1;
+          
+                for ($j=1; $j <= $percolumn ; $j++) { 
+
+                    foreach ($rowid as $key => $value) {
+                      Column_seats::create([
+                      'bus_id'=>$newbusid,
+                           'column'=>$j,
+                           'rowseat_id'=>$value,
+                           'seatnumber'=>$count++
+                       ]);
+       
+                   }
+                 
+                 
+   
+                 
+               }
+            
 
              
-
-            }
-
-            for ($j=1; $j <= $percolumn ; $j++) { 
-                foreach ($rowid as $key => $value) {
-                
-                    Column_seats::create([
-                        'bus_id'=>$newbusid,
-                        'column'=>$j,
-                        'rowseat_id'=>$value
-                    ]);
-    
-                }
-            }
+        
             
           
 
-        return redirect()->route('page.index', 'busses')->with('success','Saved Successfully!');
+        return redirect()->route('page.index', 'busses')->with('success','Saved Successfully!'); 
     }
 
     /**

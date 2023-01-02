@@ -48,7 +48,7 @@
     $data = DB::select('select 
 b.Bus_No,b.seating_capacity,b.company,b.color,
 s.departure,s.est_arrival,s.schedule,s.status,
-r.from,r.to,r.fare,
+r.from,r.to,r.aircon_fare,r.non_aircon_fare,r.est_traveltime,
 t.created_at as tripcreated,t.bus_id,t.routes_id,t.TS_id,t.id
 from buses b 
 INNER join trips t on b.id = t.bus_id 
@@ -57,8 +57,8 @@ inner join routes r on t.routes_id = r.id where b.id='.Auth::user()->bus_id.' or
    }else {
     $data = DB::select('select 
 b.Bus_No,b.seating_capacity,b.company,b.color,
-s.departure,s.est_arrival,s.schedule,s.status,
-r.from,r.to,r.fare,
+s.departure,s.est_arrival,s.schedule,s.status,s.est_traveltime,
+r.from,r.to,r.aircon_fare,r.non_aircon_fare,
 t.created_at as tripcreated,t.bus_id,t.routes_id,t.TS_id,t.id
 from buses b 
 INNER join trips t on b.id = t.bus_id 
@@ -127,11 +127,23 @@ $datenow = date('Y-m-d');
             <br>
             <span style="font-weight:bold"> {{date('h:ia',strtotime($item->est_arrival))}} </span>
 
+            <br>
+            Estimated Travel time
+            <br>
+            <span style="font-weight:bold"> 
+              {{$item->est_traveltime}}
+            </span>
+
+
         </span>
 
         </td>
         <td>
-        <span style="font-size:14px">&#8369; {{$item->fare}}</span>
+          <span style="font-weight: bold;font-size:13px"> Air Condition :</span>
+                              &#8369; {{$item->aircon_fare}}
+                              <br>
+                              <span style="font-weight: bold;font-size:13px"> Non -Air Condition :</span>
+                              &#8369; {{$item->non_aircon_fare}}
         </td>
         
       <td>

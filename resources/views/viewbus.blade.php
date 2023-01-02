@@ -67,7 +67,7 @@
                         @foreach($columns as $col)
                         @if($col->rowseat_id == $row->id)
                             <td >
-                                <span style="font-size:11px">Seat# {{$col->id}}</span>
+                                <span style="font-size:11px">Seat# {{$col->seatnumber}}</span>
                                 <br>
                                 @isset($viewingticket)
                                 

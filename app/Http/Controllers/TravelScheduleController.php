@@ -17,11 +17,15 @@ class TravelScheduleController extends Controller
       $status   = $request->status;
       $departure= $request->departure;
       $arrival  = $request->arrival;
+      $esttraveltime = $request->esttraveltime;
+      $remarks = $request->remarks;
 
       Travel_schedule::create([
         'departure'=>$departure,
         'est_arrival'=>$arrival,
         'schedule'=>$schedule,
+        'est_traveltime'=>$esttraveltime,
+        'remarks'=>$remarks,
         'status'=>$status
       ]);
 

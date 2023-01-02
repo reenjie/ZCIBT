@@ -14,7 +14,9 @@ class Routes extends Model
         'lat',
         'from',
         'to',
-        'fare'
+        'aircon_fare',
+        'non_aircon_fare',
+      
 
     ];
 }

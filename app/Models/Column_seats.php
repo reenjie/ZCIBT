@@ -12,7 +12,8 @@ class Column_seats extends Model
     protected $fillable = [
         'bus_id',
         'column',
-        'rowseat_id'
+        'rowseat_id',
+        'seatnumber'
 
     ];
 }

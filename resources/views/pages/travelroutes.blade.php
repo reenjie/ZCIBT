@@ -53,7 +53,16 @@
                         <tr>
                             <td style="font-weight:bold">{{$item->from}}</td>
                             <td style="font-weight:bold">{{$item->to}}</td>
-                            <td>&#8369; {{$item->fare}}</td>
+                            <td>
+                              <h6>
+                                <span style="font-weight: bold;font-size:13px"> Air Condition :</span>
+                              &#8369; {{$item->aircon_fare}}
+                              <br>
+                            
+                              <span style="font-weight: bold;font-size:13px"> Non -Air Condition :</span>
+                              &#8369; {{$item->non_aircon_fare}}
+                                </h6> 
+                            </td>
                         
                     
                         {{--   --}}

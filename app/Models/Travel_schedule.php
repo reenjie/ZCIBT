@@ -13,6 +13,8 @@ class Travel_schedule extends Model
         'departure',
         'est_arrival',
         'schedule',
+        'est_traveltime',
+        'remarks',
         'status'
     ];
 }

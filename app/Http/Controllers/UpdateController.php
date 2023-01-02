@@ -44,16 +44,19 @@ class UpdateController extends Controller
         case 'routes':
             $from = $request->from;
             $to   = $request->to;
-            $fare = $request->fare;
+            $afare = $request->airconfare;
+            $nafare = $request->nonairconfare;
+   
 
             Routes::where('id',$id)->update([
                 'lng'=>null,
                 'lat'=>null,
                 'from'=>$from,
                 'to' =>$to,
-                'fare' =>$fare
+                'aircon_fare' =>$afare,
+                'non_aircon_fare' =>$nafare
             ]);
-            return redirect()->route('page.index', 'routes')->with('success','Updated Successfully!');
+            return redirect()->route('page.index', 'travelroutes')->with('success','Updated Successfully!');
         break;
 
 
@@ -78,11 +81,15 @@ class UpdateController extends Controller
             $status   = $request->status;
             $departure= $request->departure;
             $arrival  = $request->arrival;
+            $esttraveltime = $request->esttraveltime;
+            $remarks = $request->remarks;
       
             Travel_schedule::where('id',$id)->update([
               'departure'=>$departure,
               'est_arrival'=>$arrival,
               'schedule'=>$schedule,
+              'est_traveltime'=>$esttraveltime,
+              'remarks'=>$remarks,
               'status'=>$status
             ]);
       

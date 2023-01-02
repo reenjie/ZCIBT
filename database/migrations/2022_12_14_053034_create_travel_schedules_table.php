@@ -18,6 +18,8 @@ return new class extends Migration
             $table->time('departure');
             $table->time('est_arrival');
             $table->date('schedule');
+            $table->text('est_traveltime');
+            $table->text('remarks');
             $table->integer('status')->comment('0 = inactive , 1 = active');
             $table->timestamps();
         });

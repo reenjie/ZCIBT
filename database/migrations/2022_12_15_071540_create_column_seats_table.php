@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('bus_id');
             $table->integer('column');
             $table->integer('rowseat_id');
+            $table->integer('seatnumber');
             $table->timestamps();
         });
     }

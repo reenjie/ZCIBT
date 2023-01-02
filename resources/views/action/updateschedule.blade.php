@@ -46,6 +46,16 @@
           <input type="time" class="form-control mb-2" required name="arrival" required value="{{$UpdateData['est_arrival']}}">
           </div>
 
+          <div class="col-md-6">
+            <h6 style="font-size:13px">Estimated Travel Time</h6>
+            <input type="text" placeholder="Number of Hours or Minutes " class="form-control mb-2" name="esttraveltime" required name="arrival" value="{{$UpdateData['est_traveltime']}}" required>
+            </div>
+
+            <div class="col-md-6">
+                <h6 style="font-size:13px">Remarks</h6>
+               <textarea name="remarks" class="form-control" placeholder="Put remarks here .." id="" style="height: 200px">{{$UpdateData['remarks']}}</textarea>
+                </div>
+
           <div class="col-md-12">
             <button class="btn btn-primary " type="submit" style="float:right">Save</button>
         </div>

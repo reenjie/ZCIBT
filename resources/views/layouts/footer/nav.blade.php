@@ -7,7 +7,7 @@
                 <script>
                     document.write(new Date().getFullYear())
                 </script>
-                <a href="#">{{ __('ZCIBT') }}</a> 
+                <a href="#">{{ __('CBTRS-ZCIBT') }}</a> 
             </p>
         </nav>
     </div>

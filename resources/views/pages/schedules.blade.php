@@ -35,6 +35,8 @@
                         <th scope="col" class="text-dark">Estimate Arrival</th>
                         <th scope="col" class="text-dark">Schedule</th>
                         <th scope="col" class="text-dark">Status</th>
+                        <th scope="col" class="text-dark">Estimate Travel Time</th>
+                        <th scope="col" class="text-dark">Remarks</th>
                         <th scope="col" class="text-dark">Created</th>
                         
                         @if(Auth::user()->user_type != 3)
@@ -69,6 +71,10 @@
                             @endif
                        
                         </td>
+                        <td>
+                            {{$item->est_traveltime}}
+                        </td>
+                        <td>{{$item->remarks}}</td>
                         <td>{{date('F j,Y',strtotime($item->created_at))}}</td>
                     
                         @if(Auth::user()->user_type != 3)

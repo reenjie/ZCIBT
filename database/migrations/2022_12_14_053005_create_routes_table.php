@@ -19,7 +19,9 @@ return new class extends Migration
             $table->text('lat')->nullable();
             $table->text('from');
             $table->text('to');
-            $table->decimal('fare');
+            $table->decimal('aircon_fare');
+            $table->decimal('non_aircon_fare');
+          
             $table->timestamps();
         });
     }

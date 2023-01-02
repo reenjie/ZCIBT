@@ -4,7 +4,7 @@
     <div class="content">
         <div class="container-fluid">
             @php
-                $revenue = DB::select('select r.fare, sum(r.fare) as total from tickets t INNER JOIN routes r on r.id = t.routes_id group by fare');    
+                $revenue = DB::select('select r.aircon_fare, sum(r.aircon_fare) as total from tickets t INNER JOIN routes r on r.id = t.routes_id group by aircon_fare');    
 
                 $sold = DB::select('select * from tickets');
 
@@ -74,7 +74,7 @@
                 $tickets = DB::Select('SELECT t.id,t.idfile,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,
 u.firstname,u.middlename,u.lastname , 
 ts.departure,ts.est_arrival,ts.schedule,ts.status as schedulestatus, 
-r.from , r.to,r.fare,
+r.from , r.to,r.aircon_fare,r.non_aircon_fare,
 b.Bus_No,b.seating_capacity,b.company,b.weight,b.color,b.per_column,b.per_row 
 , d.title,d.discount
 from users u inner join tickets t on t.user_id = u.id 
@@ -122,7 +122,13 @@ LEFT JOIN fare_discounts d on d.id = t.discount where t.status = 0 and t.discoun
     <br>
     Estimated Arrival : {{date('h:ia',strtotime($val->est_arrival))}}
     <br>
-    Fare : &#8369; {{$val->fare}}
+    Fare : 
+    <br>
+    Aircon : &#8369; {{$val->aircon_fare}}
+    <br>
+    Non-Aircon : &#8369; {{$val->non_aircon_fare}}
+    <br>
+  
     <br>
 
     @if($val->discount > 0)

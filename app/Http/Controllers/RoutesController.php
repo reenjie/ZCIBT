@@ -37,14 +37,16 @@ class RoutesController extends Controller
     {
          $from = $request->from;
          $to   = $request->to;
-         $fare = $request->fare;
+         $afare = $request->airconfare;
+         $nafare = $request->nonairconfare;
 
          Routes::create([
             'lng'=>null,
             'lat'=>null,
             'from'=>$from,
             'to' =>$to,
-            'fare' =>$fare
+            'aircon_fare' =>$afare,
+            'non_aircon_fare' =>$nafare
     
          ]);
          

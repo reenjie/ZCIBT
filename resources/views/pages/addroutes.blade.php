@@ -27,11 +27,17 @@
           <input type="text" class="form-control mb-2" required name="to">
           </div>
 
-          <div class="col-md-12 container p-2">
+          <div class="col-md-6 container p-2">
             
-          <h6 style="font-size:13px">Fare</h6>
-          <input type="number" class="form-control mb-2" required name="fare">
+          <h6 style="font-size:13px">Air Condition Fare</h6>
+          <input type="number" class="form-control mb-2" required name="airconfare">
           </div>
+
+          <div class="col-md-6 container p-2">
+            
+            <h6 style="font-size:13px">Non-AirCondition Fare</h6>
+            <input type="number" class="form-control mb-2" required name="nonairconfare">
+            </div>
         
         
         <div class="col-md-12">
