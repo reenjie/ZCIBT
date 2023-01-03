@@ -39,7 +39,7 @@ b.Bus_No,b.seating_capacity,b.company,b.color,
 s.departure,s.est_arrival,s.schedule,s.status,s.est_traveltime,
 r.from,r.to,r.aircon_fare,r.non_aircon_fare,
 t.created_at as tripcreated,t.bus_id,t.routes_id,t.TS_id,t.id
-,
+
 from buses b 
 INNER join trips t on b.id = t.bus_id 
 INNER join travel_schedules s on t.TS_id = s.id

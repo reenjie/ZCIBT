@@ -33,7 +33,7 @@ class TicketController extends Controller
         ];
         session(['reservation'=>$data]);    
 
-        $fare = DB::select('select fare from routes where id = (select routes_id from trips where id = '.$tripid.') ');
+        $fare = DB::select('select aircon_fare as fare from routes where id = (select routes_id from trips where id = '.$tripid.') ');
 
        
 

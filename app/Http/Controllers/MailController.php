@@ -130,7 +130,7 @@ class MailController extends Controller
        $data = DB::select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,
        u.firstname,u.middlename,u.lastname , u.email,
        ts.departure,ts.est_arrival,ts.schedule,ts.status as schedulestatus, 
-       r.from , r.to,r.fare,
+       r.from , r.to,r.aircon_fare,
        b.Bus_No,b.seating_capacity,b.company,b.weight,b.color,b.per_column,b.per_row 
        , d.title,d.discount
        from users u inner join tickets t on t.user_id = u.id 
@@ -146,7 +146,7 @@ class MailController extends Controller
        $Name  = $value->firstname.' '.$value->middlename.' '.$value->lastname;
        $from  = $value->from;
        $to    = $value->to;
-       $fare  = $value->fare;
+       $fare  = $value->aircon_fare;
        $busno = $value->Bus_No;
        $seatno = $value->column_seat_id; 
        $departure = $value->departure;
@@ -160,6 +160,11 @@ class MailController extends Controller
        }
 
 
+       $sitno = DB::select('select * from column_seats where id = '.$seatno.' ');
+
+       foreach ($sitno as $key => $st) {
+        $seatnum = $st->seatnumber;
+       }
 
 
        $mail = new PHPMailer(true);
@@ -222,7 +227,7 @@ Seating Capacity : '.$seatingcapacity.'
 </div>
 <h2>Reference Code : '.$id.date('FYmd',strtotime($schedule)).'
 <br>
-Seat No: '.$seatno.'
+Seat No: '.$seatnum.'
 </h2>
 <span style="font-size:11px">Present this Reference code in the bus you have selected</span>
 <br>

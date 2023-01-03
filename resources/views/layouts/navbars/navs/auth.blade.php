@@ -11,11 +11,11 @@
              
             </ul>
             <ul class="navbar-nav   d-flex align-items-center">
-                <li class="nav-item">
+              <!--   <li class="nav-item">
                     <a class="nav-link" href=" {{route('profile.edit') }} ">
                         <span class="no-icon">{{ __('Account') }}</span>
                     </a>
-                </li>
+                </li> -->
             
                 <li class="nav-item">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
