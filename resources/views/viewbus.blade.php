@@ -49,6 +49,10 @@
             <h6 style="text-align:center">FRONT OF THE BUS</h6>
         <div class="container p-5">
         <div class="table-responsive" >
+            {{-- <style>
+                table, tr, td, thead, tbody {display: block!important;}
+tr {float: left!important; width: 50%!important;}
+            </style> --}}
         <table class="table table-bordered table-light">
   <thead>
     <tr>
@@ -62,12 +66,35 @@
   </thead>
   <!-- busid  -->
   <tbody>
+  <tr>
+    <td colspan="100%">
+        <div style="display: flex;">
+            <div class="" style="width:100%;border-right:1px solid gray">
+                <div class="card-body" style="text-align: center;font-weight:bold;font-size:14px">
+                    <i class="fas fa-steering-wheel"></i> DRIVER
+                </div>
+              </div>
+              
+              <div class=""  style="width:100%">
+                <div class="card-body"  style="text-align: center;font-weight:bold;font-size:14px">
+                    ENTRANCE
+                </div>
+              </div>
+        </div>
+    </td>
+   
+  </tr>
   @foreach($rows as $row)
+ 
                     <tr >
+                       
                         @foreach($columns as $col)
                         @if($col->rowseat_id == $row->id)
-                            <td >
-                                <span style="font-size:11px">Seat# {{$col->seatnumber}}</span>
+                        <td>
+                            {{$col->seatnumber}}
+                        </td>
+                          {{--   <td >
+                                <span style="font-size:11px">Seat# {{$row->row}}</span>
                                 <br>
                                 @isset($viewingticket)
                                 
@@ -133,7 +160,7 @@
                               
                                 @endisset
                            
-                            </td>
+                            </td> --}}
                             @endif
                         @endforeach
                     </tr>

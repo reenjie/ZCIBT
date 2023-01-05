@@ -132,9 +132,9 @@
                                             <br>
                                           
                                         </h2>
-                                        <h6  class="text-white">  <span style="font-size:12px">Zamboanga City Integrated Bus Terminal 
-                                            <br>
-                                            Ticket Reservation System
+                                        <h6  class="text-white">  <span style="font-size:12px">Cloud-based Ticketing and Routing System.
+
+                                          
                                         </span></h6>
                             </div>
                             <div class="col">

@@ -9,7 +9,7 @@ Tip 2: you can also add an image using data-image tag
             <a href="#" class="simple-text">
                 {{ __("ZCIBT") }}
                 <br>
-                <span style="font-size:11px;">Zamboanga City Integrated Bus Terminal</span>
+                <span style="font-size:11px;">CBTRS – ZCIBT Cloud-based Ticketing and Routing System</span>
             </a>
             <span class="badge badge-success">
             @if(Auth::user()->user_type == 1)

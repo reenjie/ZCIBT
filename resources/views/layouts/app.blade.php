@@ -46,6 +46,38 @@
 
         </div>
        
+        <div class="modal fade" id="aboutus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">About Us <i class="fas fa-info-circle"></i></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h4 style="font-weight:bold">
+                  The cloud-based ticketing and routing system for Zamboanga City 
+                  Integrated Bus Terminal
+                </h4>
+                  <h5>
+                 <p>
+                  is a web-based system that perfectly fits with changing 
+                  the current way of buying bus tickets. <br> People traveling to and from Zamboanga 
+                  City can utilize this service to reserve and purchase bus tickets without any hassle. 
+                  As well, passengers see the different travel routes and schedules offered by the 
+                  Zamboanga City Integrated Bus Terminal.
+                 </p>
+                  </h5>
+              </div>
+              <div class="modal-footer">
+
+                <h6 style="font-size:13px;text-align:right">All rights reserved &middot; 2022</h6>
+    
+              </div>
+            </div>
+          </div>
+        </div>
 
 
     </body>

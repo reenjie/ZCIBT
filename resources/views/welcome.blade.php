@@ -12,7 +12,9 @@
                       <br>
                       <h4 class="text-light">
                         <button class="btn btn-warning" onclick="window.location.href='{{route('reserve')}}'">Reserve now</button>
-                        <button class="btn btn-info">About Us</button>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#aboutus">About Us</button>
+
+                    
 
                       </h4>
 
@@ -93,6 +95,9 @@
                     
                         </tr>
                     </thead>
+                    <!-- Modal -->
+
+
                     <tbody>
                         @php
                         $data = DB::select('SELECT * FROM `travel_schedules` where status = 1');
