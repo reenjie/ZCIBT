@@ -73,9 +73,11 @@ $ts_id = trip::findorFail($tripid)->TS_id;
 	}else{
 		$ts_id=0;
 	}
+
+	$buscolumn = $bus[0]->per_column;
 	
 
-	return view('viewbus',compact('columns','rows','busid','viewingticket','bus','reserve','tripid','authenticathed','ts_id'));
+	return view('viewbus',compact('columns','rows','busid','viewingticket','bus','reserve','tripid','authenticathed','ts_id','buscolumn'));
 })->name('viewbus');
 
 Route::get('Reserve',function(Request $request){

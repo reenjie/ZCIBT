@@ -45,7 +45,7 @@ class BusController extends Controller
       $company = $request->company;
 
      
-
+      $count = 1;
            $b = Bus::create([
                 'Bus_No'=>$busnumb,
                 'seating_capacity'=>$seatcapacity,
@@ -59,8 +59,11 @@ class BusController extends Controller
           $newbusid =  $b->id;
 
             $seats = $perrow * $percolumn;
+
+          
             //save row seats
             for ($i=1; $i <= $perrow ; $i++) { 
+
                $row =  Row_seats::create([
                     'bus_id'=>$newbusid,
                     'row'=>$i,
@@ -68,28 +71,50 @@ class BusController extends Controller
 
                $rowid[] = $row->id;
 
-
             }
+          
+               foreach ($rowid as $key => $value) {
+
+                            for ($j=1; $j <= $percolumn ; $j++) { 
+
+                              
+                                Column_seats::create([
+                                'bus_id'=>$newbusid,
+                                    'column'=>$j,
+                                    'rowseat_id'=>$value,
+                                    'seatnumber'=>$count++
+                                ]);
+                
+                            
+                        
+                        }
+               
+               }
+             
+            
+                    
+
+
 
             
-            $count = 1;
           
-                for ($j=1; $j <= $percolumn ; $j++) { 
+          
+            //     for ($j=1; $j <= $percolumn ; $j++) { 
 
-                    foreach ($rowid as $key => $value) {
-                      Column_seats::create([
-                      'bus_id'=>$newbusid,
-                           'column'=>$j,
-                           'rowseat_id'=>$value,
-                           'seatnumber'=>$count++
-                       ]);
+                    //foreach ($rowid as $key => $value) {
+                    //   Column_seats::create([
+                    //   'bus_id'=>$newbusid,
+                    //        'column'=>$j,
+                    //        'rowseat_id'=>$value,
+                    //        'seatnumber'=>$count++
+                    //    ]);
        
-                   }
+                 //  }
                  
                  
    
                  
-               }
+            //    }
             
 
              
@@ -97,7 +122,7 @@ class BusController extends Controller
             
           
 
-        return redirect()->route('page.index', 'busses')->with('success','Saved Successfully!'); 
+       return redirect()->route('page.index', 'busses')->with('success','Saved Successfully!'); 
     }
 
     /**

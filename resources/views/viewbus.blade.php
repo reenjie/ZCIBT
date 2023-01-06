@@ -78,94 +78,147 @@ tr {float: left!important; width: 50%!important;}
               <div class=""  style="width:100%">
                 <div class="card-body"  style="text-align: center;font-weight:bold;font-size:14px">
                     ENTRANCE
+
+                  
                 </div>
               </div>
         </div>
     </td>
    
   </tr>
+  @php
+                            $count = 1;
+                        @endphp
   @foreach($rows as $row)
  
                     <tr >
-                       
-                        @foreach($columns as $col)
+                     
+                         @foreach($columns as $col)
                         @if($col->rowseat_id == $row->id)
-                        <td>
-                            {{$col->seatnumber}}
-                        </td>
-                          {{--   <td >
-                                <span style="font-size:11px">Seat# {{$row->row}}</span>
-                                <br>
-                                @isset($viewingticket)
-                                
-                                @php
-                                    $reserved = DB::select('SELECT * FROM `tickets` where bus_id = '.$busid.' and column_seat_id ='.$col->id.' and row_seat_id = '.$col->rowseat_id.' and ts_id ='.$ts_id.'  ');
-                                    @endphp
-
-                                    @if(count($reserved)>=1)
-                                        @foreach($reserved as $val)
-                                        @if($val->user_id == Auth::user()->id)
-                                        <span class="badge bg-success mb-3">Selected</span>
-                                      <br>
-                                    <h6 style="text-align:center">
-                                    <button data-ticket = "{{$val->id}}" data-busid ="{{$busid}}" class="changeseat btn btn-link text-danger btn-sm px-2">Change seat <i class="fas fa-exclamation-triangle"></i></button>
-                                </h6>
-                                        @else 
-
-                                        <span class="badge bg-danger">Occupied</span>
-                                        @endif
-                                        @endforeach
-                                  
-                                    @else 
-                                  
-                                    <span class="badge bg-success">Vacant</span>
-                                 
-                                    @endif
-                               
-                                @endisset
-
-                                @isset($reserve)
-                                <!--  -->
-                                    @php
-                                    $reserved = DB::select('SELECT * FROM `tickets` where bus_id = '.$busid.' and column_seat_id ='.$col->id.' and row_seat_id = '.$col->rowseat_id.' and ts_id ='.$ts_id.' ');
-                                    @endphp
-
-                                    @if(count($reserved)>=1)
-                                        @foreach($reserved as $val)
-                                        @if(auth()->check())
-                                        @if($val->user_id == Auth::user()->id)
-                                        <span class="badge bg-success mb-3">Selected</span>
-                                      <br>
-                                    <h6 style="text-align:center">
-                                    <button data-ticket = "{{$val->id}}" data-busid ="{{$busid}}" class="changeseat btn btn-link text-danger btn-sm px-2">Change seat <i class="fas fa-exclamation-triangle"></i></button>
-                                </h6>
-                                        @else 
-
-                                        <span class="badge bg-danger">Occupied</span>
-                                        @endif
-                                        @else 
-                                        <span class="badge bg-danger">Occupied</span>
-                                        @endif
-                                      
-                                        @endforeach
-                                  
-                                    @else 
-                                  
-                                   
-                                    <button data-colid = "{{$col->id}}" data-auth ="@isset($authenticathed) 1 @else 0 @endisset"  data-tripid="{{$tripid}}" data-rowid ="{{$col->rowseat_id}}" class="select btn btn-dark btn-sm px-3">Select</button>
-
-                                      
-                                 
-                                    @endif
-                              
-                                @endisset
                            
-                            </td> --}}
+                            @if($buscolumn == 4)
+                            @if($col->column == 3)
+                            <td  class="table-primary" >
+                              <i class="fas fa-person-walking text-dark"></i>
+                            </td>
+                        @endif
+                            @else 
+
+                            @if($col->column == 4)
+                            <td  class="table-primary" >
+                              <i class="fas fa-person-walking text-dark"></i>
+                            </td>
+                        @endif
+                            @endif
+                     
+                        
+                        
+                        <td id="{{$col->id}}data" >
+    <span style="font-size:11px">Seat# {{$col->seatnumber}}</span>
+    <br>
+    @isset($viewingticket)
+    
+    @php
+        $reserved = DB::select('SELECT * FROM `tickets` where bus_id = '.$busid.' and column_seat_id ='.$col->id.' and row_seat_id = '.$col->rowseat_id.' and ts_id ='.$ts_id.'  ');
+        @endphp
+
+        @if(count($reserved)>=1)
+            @foreach($reserved as $val)
+            @if($val->user_id == Auth::user()->id)
+            <span class="badge bg-success mb-3">Selected</span>
+          <br>
+        <h6 style="text-align:center">
+        <button data-ticket = "{{$val->id}}" data-busid ="{{$busid}}" class="changeseat btn btn-link text-danger btn-sm px-2">Change seat <i class="fas fa-exclamation-triangle"></i></button>
+    </h6>
+            @else 
+
+            <span class="badge bg-danger">Occupied</span>
+
+            <script>
+            $('#{{$col->id}}data').addClass('table-danger');
+        </script>
+            @endif
+            @endforeach
+      
+        @else 
+      
+        <span class="badge bg-success">Vacant</span>
+
+        <script>
+            $('#{{$col->id}}data').addClass('table-success');
+        </script>
+     
+        @endif
+   
+    @endisset
+
+    @isset($reserve)
+    <!--  -->
+        @php
+        $reserved = DB::select('SELECT * FROM `tickets` where bus_id = '.$busid.' and column_seat_id ='.$col->id.' and row_seat_id = '.$col->rowseat_id.' and ts_id ='.$ts_id.' ');
+        @endphp
+
+        @if(count($reserved)>=1)
+            @foreach($reserved as $val)
+            @if(auth()->check())
+            @if($val->user_id == Auth::user()->id)
+            <span class="badge bg-success mb-3">Selected</span>
+            <script>
+            $('#{{$col->id}}data').addClass('table-info');
+        </script>
+          <br>
+        <h6 style="text-align:center">
+        <button data-ticket = "{{$val->id}}" data-busid ="{{$busid}}" class="changeseat btn btn-link text-danger btn-sm px-2">Change seat <i class="fas fa-exclamation-triangle"></i></button>
+    </h6>
+            @else 
+
+            <span class="badge bg-danger">Occupied</span>
+            
+            <script>
+            $('#{{$col->id}}data').addClass('table-danger');
+        </script>
+            @endif
+            @else 
+            <span class="badge bg-danger">Occupied</span>
+            
+            <script>
+            $('#{{$col->id}}data').addClass('table-danger');
+        </script>
+            @endif
+          
+            @endforeach
+      
+        @else 
+        <script>
+            $('#{{$col->id}}data').addClass('table-success');
+        </script>
+       
+        <button data-colid = "{{$col->id}}" data-auth ="@isset($authenticathed) 1 @else 0 @endisset"  data-tripid="{{$tripid}}" data-rowid ="{{$col->rowseat_id}}" class="select btn btn-warning btn-sm px-3">Select</button>
+
+          
+     
+        @endif
+  
+    @endisset
+
+</td>
+
+
+                      
+                 
+                           
+                        
                             @endif
                         @endforeach
-                    </tr>
+                      <!--  <td>{{$count++}}</td> -->
+                            
+
+                        </tr>
 
   @endforeach
+
+  <tr>
+
   </tbody>
 </table>
         </div>
