@@ -254,4 +254,10 @@ class TicketController extends Controller
 
         return redirect()->route('page.index', 'passengers')->with('success','Confirmed Successfully!');
     }
+
+
+
+    public function reservemultiple_selection(Request $request){
+        dd($request);
+    }
 }

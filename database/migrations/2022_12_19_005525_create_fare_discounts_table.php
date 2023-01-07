@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('fare_discounts', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->decimal('discount');
+            $table->integer('discount');
             $table->timestamps();
         });
     }

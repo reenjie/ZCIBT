@@ -18,6 +18,16 @@
                                 @csrf
                             
                         <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <select name="bustype" class="form-control" id="" required>
+
+                                    <option value="">Select Bus Types</option>
+                                    <option value="Rural Tours">Rural Tours</option>
+                                    <option value="Ceres Tours">Ceres Tours</option>
+                                    <option value="Lizamay">Lizamay</option>
+                                </select>
+
+                            </div>
           <div class="col-md-12">
             <h6 style="font-size:13px">Bus Number:</h6>
             <input type="text" class="form-control mb-2" name="busnumber" placeholder="Bus Number" autofocus required>

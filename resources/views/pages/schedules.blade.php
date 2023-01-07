@@ -31,6 +31,7 @@
                         <table class="table table-striped">
                     <thead class="">
                         <tr class="table-danger" >
+                          <th scope="col" class="text-dark">Bus Type</th>
                         <th scope="col" class="text-dark">Departure</th>
                         <th scope="col" class="text-dark">Estimate Arrival</th>
                         <th scope="col" class="text-dark">Schedule</th>
@@ -54,6 +55,9 @@
                         @if(count($data)>=1)
                         @foreach($data as $item)
                         <tr>
+                          <td>
+                        {{$item->bustype}}
+                          </td>
                         <td style="font-weight:bold">{{date('h:ia',strtotime($item->departure))}} </td>
                          <td style="font-weight:bold">{{date('h:ia',strtotime($item->est_arrival))}}</td>
                         <td >{{date('m/d/Y | F j,Y',strtotime($item->schedule))}}</td>

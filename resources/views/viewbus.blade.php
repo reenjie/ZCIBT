@@ -45,6 +45,11 @@
                  </button>
                 </div>
                @endif
+               <button class="btn btn-dark btn-sm" id="setmultiple"> Set Multiple Selection</button>
+                <div id="options" class="d-none">
+                    <button class="btn btn-danger btn-sm" id="cancel">Cancel Multiple Selection</button>
+                    <button class="btn btn-primary btn-sm" id="clearselection">Clear  Selection</button>
+                </div>
 
             <h6 style="text-align:center">FRONT OF THE BUS</h6>
         <div class="container p-5">
@@ -53,6 +58,10 @@
                 table, tr, td, thead, tbody {display: block!important;}
 tr {float: left!important; width: 50%!important;}
             </style> --}}
+
+           
+            <form action="{{route('reservemultiple_selection')}}"  method="post">
+                @csrf
         <table class="table table-bordered table-light">
   <thead>
     <tr>
@@ -192,10 +201,12 @@ tr {float: left!important; width: 50%!important;}
         <script>
             $('#{{$col->id}}data').addClass('table-success');
         </script>
-       
-        <button data-colid = "{{$col->id}}" data-auth ="@isset($authenticathed) 1 @else 0 @endisset"  data-tripid="{{$tripid}}" data-rowid ="{{$col->rowseat_id}}" class="select btn btn-warning btn-sm px-3">Select</button>
 
-          
+        <button data-colid = "{{$col->id}}" data-auth ="@isset($authenticathed) 1 @else 0 @endisset" type="button"  data-tripid="{{$tripid}}" data-rowid ="{{$col->rowseat_id}}" class="select btn btn-warning btn-sm px-3">Select</button>
+
+        
+        <input type="checkbox" style=" width: 28px;
+        height: 28px;" class="d-none multipleselect" name="selectedsits[]" value="{{$col->id}}">
      
         @endif
   
@@ -221,6 +232,12 @@ tr {float: left!important; width: 50%!important;}
 
   </tbody>
 </table>
+    <div class="card d-none" id="submitbtn">
+        <div class="card-body">
+            <button type="submit" class="btn btn-info" style="float: right;">Reserve Selection <i class="fas fa-check-circle"></i></button>
+        </div>
+    </div>
+</form>
         </div>
         </div>
 <h6 style="text-align:center">BACK OF THE BUS</h6>
@@ -229,6 +246,25 @@ tr {float: left!important; width: 50%!important;}
             </div>
        
 <script>
+    $('#setmultiple').click(function(){
+        $(this).addClass('d-none');
+        $('#options').removeClass('d-none');
+        $('.select').addClass('d-none');
+        $('.multipleselect').removeClass('d-none');
+        $('#submitbtn').removeClass('d-none');
+    })
+
+    $('#cancel').click(function(){
+        $('#options').addClass('d-none');
+        $('#setmultiple').removeClass('d-none');
+        $('.select').removeClass('d-none');
+        $('.multipleselect').addClass('d-none');
+        $('#submitbtn').addClass('d-none');
+    })
+
+    $('#clearselection').click(function(){
+        $('.multipleselect').prop('checked',false);
+    })
     $('.changeseat').click(function(){
         var id = $(this).data('ticket');
         var busid = $(this).data('busid');

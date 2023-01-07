@@ -17,14 +17,14 @@ class DiscountSeeder extends Seeder
     {
         DB::table('fare_discounts')->insert([
             'title'=>'Student Discount',
-            'discount'=>'300.00',
+            'discount'=>'15',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('fare_discounts')->insert([
             'title'=>'Senior Citizen Discount',
-            'discount'=>'300.00',
+            'discount'=>'15',
             'created_at' => now(),
             'updated_at' => now()
         ]);

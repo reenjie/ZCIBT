@@ -45,7 +45,7 @@
                                     <option value="">Select Bus</option>
                                     @endif
                                     @foreach($bus as $value)
-                                    <option value="{{$value->id}}">#{{$value->Bus_No}} -- {{$value->color}} -- {{$value->company}}</option>
+                                    <option value="{{$value->id}}">{{$value->bustype}} | #{{$value->Bus_No}} -- {{$value->color}} -- {{$value->company}}</option>
                                     @endforeach
                                 </select>
 
@@ -76,7 +76,7 @@
                                 <select name="schedule" class="form-control" required>
                                 <option value="">Select Travel Schedule</option>
                                     @foreach($ts as $value)
-                                    <option value="{{$value->id}}">{{date('F j, Y',strtotime($value->schedule))}} | Departure : {{date('h:ia',strtotime($value->departure))}} | Arrival : {{date('h:ia',strtotime($value->est_arrival))}}</option>
+                                    <option value="{{$value->id}}">{{$value->bustype}} | {{date('F j, Y',strtotime($value->schedule))}} | Departure : {{date('h:ia',strtotime($value->departure))}} | Arrival : {{date('h:ia',strtotime($value->est_arrival))}}</option>
                                     @endforeach
                                 </select>
 

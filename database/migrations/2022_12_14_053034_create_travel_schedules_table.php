@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('travel_schedules', function (Blueprint $table) {
             $table->id();
+            $table->text('bustype');
             $table->time('departure');
             $table->time('est_arrival');
             $table->date('schedule');

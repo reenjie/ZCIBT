@@ -18,6 +18,16 @@
                                 @csrf
                             
                         <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <select name="bustype" class="form-control" id="" required>
+
+                                    <option value="">Select Bus Types</option>
+                                    <option value="Rural Tours">Rural Tours</option>
+                                    <option value="Ceres Tours">Ceres Tours</option>
+                                    <option value="Lizamay">Lizamay</option>
+                                </select>
+
+                            </div>
           <div class="col-md-6">
             <h6 style="font-size:13px">Set Schedule:</h6>
             <input type="date" class="form-control mb-2" name="schedule" placeholder="Bus Number" autofocus required>
@@ -28,6 +38,7 @@
                  <option value="">Select Status</option>
                 <option value="0">Inactive</option>
                 <option value="1">Active</option>
+                <option value="2">Full</option>
         </select>
           </div>
 

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('color')->nullable();
             $table->integer('per_column');
             $table->integer('per_row');
+            $table->text('bustype');
             $table->timestamps();
         });
     }

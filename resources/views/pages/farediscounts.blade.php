@@ -74,7 +74,7 @@
                         <tr>
                             <td style="font-weight:bold">{{$item->title}}</td>
                         
-                            <td>&#8369; {{$item->discount}}</td>
+                            <td>{{$item->discount}} %</td>
                             <td>{{date('@h:ia F j,Y',strtotime($item->created_at))}}</td>
                     
                         {{--   --}}

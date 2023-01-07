@@ -49,6 +49,8 @@ Route::post('createnewuser',[App\Http\Controllers\UserController::class, 'create
 
 Route::get('confirm',[App\Http\Controllers\TicketController::class, 'confirm'])->name('confirm');
 
+Route::post('reservemultiple_selection',[App\Http\Controllers\TicketController::class, 'reservemultiple_selection'])->name('reservemultiple_selection');
+
 Route::get('actiondiscountrequest',[App\Http\Controllers\TicketController::class, 'actiondiscountrequest'])->name('actiondiscountrequest');
 Route::get('Viewing/Bus/Occs',function(Request $request){
 

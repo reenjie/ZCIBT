@@ -16,6 +16,7 @@ class Bus extends Model
         'weight',
         'color',
         'per_column',
-        'per_row'
+        'per_row',
+        'bustype'
     ];
 }

@@ -43,6 +43,7 @@ class BusController extends Controller
       $percolumn = $request->percolumn;
       $color = $request->color;
       $company = $request->company;
+      $bustype = $request->bustype;
 
      
       $count = 1;
@@ -54,6 +55,7 @@ class BusController extends Controller
                 'color'=>$color,
                 'per_column'=>$percolumn,
                 'per_row'=>$perrow,
+                'bustype'=>$bustype,
             ]);
 
           $newbusid =  $b->id;

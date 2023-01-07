@@ -8,7 +8,7 @@
                 <div class="col-md-12">
                     <div class="card strpied-tabled-with-hover">
                         <div class="card-header ">
-                            <button class="btn btn-warning btn-sm " onclick="window.location.href='{{route('page.index', 'routes')}}' "><i class="fas fa-arrow-left"></i> Back</button>
+                            <button class="btn btn-warning btn-sm " onclick="window.location.href='{{route('page.index', 'travelroutes')}}' "><i class="fas fa-arrow-left"></i> Back</button>
                             <h4 class="card-title mt-3">Update Bus</h4>
                            
                         </div>

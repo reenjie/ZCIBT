@@ -10,6 +10,7 @@ class Travel_schedule extends Model
     use HasFactory;
 
     protected $fillable=[
+        'bustype',
         'departure',
         'est_arrival',
         'schedule',
