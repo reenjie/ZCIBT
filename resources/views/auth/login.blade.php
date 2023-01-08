@@ -1,7 +1,9 @@
 @extends('layouts/app', ['activePage' => 'login', 'title' => 'ZCIBT'])
 
 @section('content')
-
+    @php
+        //session()->flush();
+    @endphp
     <div class="full-page section-image" data-color="red" data-image="{{ asset('light-bootstrap/img/bg.jpg') }}">
         <div class="content pt-5">
             <div class="container mt-5">    

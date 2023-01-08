@@ -65,11 +65,19 @@
                         <td >
                             @if($item->status == 0)
                             <span class="badge bg-danger">Inactive</span>
-                            @else 
+                            @else
+                               
                               @if($datenow > $item->schedule)
                             <span class="badge bg-danger">Inactive</span>
                               @else 
+
+                                @if($item->status == 2)
+                                <span class="badge bg-info">Full</span>
+
+                                @else 
                             <span class="badge bg-success">Active</span>
+
+                            @endif
 
                               @endif
                             @endif

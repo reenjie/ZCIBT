@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('travel_schedules', function (Blueprint $table) {
+        Schema::create('qrcodes', function (Blueprint $table) {
             $table->id();
-            $table->text('bustype');
-            $table->time('departure');
-            $table->time('est_arrival');
-            $table->date('schedule');
-            $table->text('est_traveltime');
-            $table->text('remarks');
-            $table->integer('status')->comment('0 = inactive , 1 = active , 2 =Full ');
+            $table->text('file');
+            $table->integer('bus_id');
             $table->timestamps();
+
         });
     }
 
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('travel_schedules');
+        Schema::dropIfExists('qrcodes');
     }
 };

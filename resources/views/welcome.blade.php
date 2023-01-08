@@ -84,7 +84,7 @@
                         <div class="card-body">
                         <h4 class="text-light">Schedules</h4>
                     <div class="table-responsive">
-                    <table class="table table-striped text-light table-bordered">
+                    <table class="table table-striped text-light ">
                     <thead class="">
                         <tr class="table-danger" >
                           <th scope="col" class="text-dark">Bus Type</th>

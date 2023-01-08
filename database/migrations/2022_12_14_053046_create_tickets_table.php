@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->integer('tripid');
             $table->integer('bus_id');
             $table->integer('column_seat_id');
             $table->integer('row_seat_id');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('discount');
             $table->text('idfile')->nullable();
+            $table->text('receiptfile')->nullable();
             $table->integer('status');
             $table->text('reason')->nullable();
             $table->integer('exp_date')->nullable();

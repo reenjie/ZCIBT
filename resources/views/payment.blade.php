@@ -104,6 +104,74 @@
           
     </div>
     @endif
+
+   
+        @isset($selected)
+        <div class="col-md-6">
+            <div class="container">
+             <div class="card border-danger">
+                <div class="card-body">
+                    @foreach ($busdetails as $bu)
+                    {{$bu->bustype}}
+                    <br>
+                    Bus #: {{$bu->Bus_No}}
+ 
+                    @endforeach
+                    <br>
+                  @foreach ($scheddetails as $sched)
+                  <span style="font-size:13px">
+                    <span style="font-weight:bold"> {{date('F j, Y',strtotime($sched->schedule))}}</span> 
+                    <br>
+                    Departure:
+                    <br>
+                    <span style="font-weight:bold"> {{date('h:ia',strtotime($sched->departure))}} </span>
+                    <br>
+                    Estimated Arrival
+                    <br>
+                    <span style="font-weight:bold"> {{date('h:ia',strtotime($sched->est_arrival))}} </span>
+        
+                    <br>
+                    Estimated Travel time
+                    <br>
+                    <span style="font-weight:bold"> 
+                      {{$sched->est_traveltime}}
+                    </span>
+                 </span>
+                      
+                  @endforeach
+                    
+                </div>
+             </div>
+                <ul class="list-group">
+                 
+                    @foreach ($selected as $sit)
+                  
+                    @php
+                        $outsit = DB::select('select * from column_seats where id = '.$sit.' ');
+    
+                       
+                    @endphp
+    
+                    @foreach ($outsit as $s)
+                     
+                    <li class="list-group-item">
+                       <span style="font-size:12px"> Seat Number :</span> {{$s->seatnumber}}
+    
+                    </li>
+                        
+                    @endforeach
+    
+                @endforeach
+                </ul>
+    
+              
+            </div>
+    
+        </div>
+        @endisset
+    
+ 
+
     <div class="@if($auth == 1) col-md-12 @else col-md-6 @endif container">
     <h2 style="">
     <span style="font-size:14px">Request Discount</span>
@@ -113,7 +181,7 @@
         $discounts = DB::select('SELECT * FROM `fare_discounts`');
         @endphp
         @foreach($discounts as $amt )
-            <option value="{{$amt->id}}">{{$amt->title}} | &#8369; {{$amt->discount}}</option>
+            <option value="{{$amt->id}}">{{$amt->title}} | {{$amt->discount}} %</option>
         @endforeach
     </select>
 
@@ -143,51 +211,76 @@
 <span style="font-size:14px;font-weight:normal">Total Amount Payable :
     
     </span>    <br>
-&#8369; 
+
+    @isset($selected)
+   
+   
+    @foreach ($fare as $f)
+    <span style="font-size:15px;font-weight:normal">    Fare :  &#8369;  {{$f->fare}} x {{count($selected)}}</span>
+    <br>
+    &#8369; 
+    {{$f->fare * count($selected)}}
+@endforeach
+    
+    @else
+    &#8369; 
     @foreach ($fare as $f)
         {{$f->fare}}
     @endforeach
+    @endisset
+
 </h2>
 
-
-
-
-    <h6>Accepted Cards
-
-<br>
-<span style="font-size:20px;margin:4px;letter-spacing:5px">
-<i class="fa fa-cc-visa" style="color:navy;"></i>
-<i class="fa fa-cc-amex" style="color:blue;"></i>
-<i class="fa fa-cc-mastercard" style="color:red;"></i>
-<i class="fa fa-cc-discover" style="color:orange;"></i>
-</span>
-
-</h6>
-
-<br><br><br>
-
-
-<h6>Name on Card</h6>
-<input type="text" class="form-control mb-2" placeholder='Your name' autofocus required>
-
-<h6>Credit Card number</h6>
-<input type="text" class="form-control mb-2" placeholder='0000 0000 0000 0000' required>
-
-<div class="row mb-3">
-<div class="col-md-6">
-<h6>Expiry date</h6>
-<input type="text" class="form-control mb-2" placeholder='MM/YY' required>
+<div class="card">
+    <div class="card-body">
+        <h5>Select Payment Method</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <label for="atm" style="font-weight: bold">
+                            <input type="radio" id="atm" style="width: 20px; heigth:20px" class="pd" name="paymentmethod" value="atm"> Credit Card
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <label for="gcash" style="font-weight: bold">
+                            <input type="radio" class="pd" id="gcash" name="paymentmethod" value="gcash"> Gcash
+                        </label>
+                    </div>
+                </div>
+            </div>
+            {{-- <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <label for="overthecounter" style="font-weight: bold">
+                            <input type="radio" class="pd" id="overthecounter" name="paymentmethod" value="overthecounter"> Over the Counter
+                        </label>
+                    </div>
+                </div>
+            </div> --}}
+        </div>
+    </div>
 </div>
 
-<div class="col-md-6">
-<h6>CVC code</h6>
-<input type="text" class="form-control mb-2" placeholder='CVC' required>
-</div>
+    <div class="card  shadow d-none" id="pmethod">
+        <div class="card-body">
+            <div id="atm_" class="d-none">
+                @include('payment.atm')
+            </div>
+            <div id="gcash_"  class="d-none">
+                @include('payment.gcash')
+            </div>
+            <div id="overthecounter_"  class="d-none">
+                @include('payment.overthecounter')
+            </div>
+        </div>
+    </div>
 
-</div>
-<span class="text-danger" style="font-size:13px">No Card information will be saved. This is for development purposes only.</span>
-
-<button type="submit"  class="btn btn-success p-2 px-5" style="float:right">Pay now</button>
+   
 
 
     </div>
@@ -213,6 +306,32 @@
                 $('.card').removeClass('card-hidden');
             }, 700)
             
+            $('.pd').click(function(){
+                var selected = $(this).val();
+                
+                $('#pmethod').removeClass('d-none');
+                if(selected == 'atm'){
+                    $('#atm_').removeClass('d-none');
+                    $('#gcash_').addClass('d-none');
+                    $('#overthecounter_').addClass('d-none');
+                    $('.atmattr').addAttr('required');
+                    $('.gcashattr').removeAttr('required');
+                }else if (selected == 'gcash'){
+                    $('#gcash_').removeClass('d-none');
+                    $('#atm_').addClass('d-none');
+                    $('#overthecounter_').addClass('d-none');
+                    $('.atmattr').removeAttr('required');
+                    $('.gcashattr').attr('required',true);
+                }else if (selected == 'overthecounter'){
+                    $('#overthecounter_').removeClass('d-none');
+                    $('#atm_').addClass('d-none');
+                    $('#gcash_').addClass('d-none');
+                    $('.atmattr').removeAttr('required');
+                    $('.gcashattr').removeAttr('required');
+                }
+              
+            })
+
             $('#selectdiscount').change(function(){
                 var discount = $(this).val();
                 if(discount == ''){

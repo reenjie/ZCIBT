@@ -1,4 +1,4 @@
-@extends('layouts/app', ['activePage' => 'reserve', 'title' => 'ZCIBT'])
+@extends('layouts/app', ['activePage' => 'reserve', 'title' => 'ZCIBT','activeButton' => 'laravel','navName' => 'Bus Seats'])
 
 @section('content')
     <div class="full-page section-image" data-color="red" data-image="{{asset('light-bootstrap/img/bghome.jpg')}}">
@@ -66,7 +66,13 @@ inner join routes r on t.routes_id = r.id and s.schedule >= "'.$datenow.'" ');
             <br>
             Vacant Seats:
             <br>
-            <span style="font-weight:bold">51</span>
+            <span style="font-weight:bold">
+                @php
+                    $seatcount = DB::select('select * from tickets where tripid = '.$item->id.'  ');
+
+                    echo $item->seating_capacity - count($seatcount);
+                @endphp
+            </span>
         </span>
         </td>
         <td>

@@ -66,8 +66,59 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div class="col-md-4 mt-3">
+                <button class="btn btn-info " data-toggle="modal" data-target="#gcashpmethod">
+                   Manage Gcash Payment QR-Code <i class="fas fa-cogs"></i>
+                  </button>
+
+            </div>
+        </div>
+     
+  
+  <!-- Modal -->
+  <div class="modal fade" id="gcashpmethod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Gcash Qr-Code</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{route('saveqr')}}" method="POST" enctype="multipart/form-data">
+            @csrf
+        <div class="modal-body">
+            @php
+                $qrcode = DB::select('SELECT * FROM `qrcodes` where bus_id = 0 ');
+            @endphp
+
+                <div class="container">
+                 
+                        @foreach ($qrcode as $item)
+                        <img src="{{asset('qrcode').'/'.$item->file}}" alt="" style="width:100%" >
+    
+                        <input type="hidden" name="id" value="{{$item->id}}">
+                        @endforeach
+                    
+                </div>
+
+            <span style="font-size:13px" class="text-danger">
+                Upload a file to Update QR-Code.
+            </span>
+            <input type="file" name="qrfile" required class="form-control">
+            
+           
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
         <br>
         @if(Auth::user()->user_type == 0 || Auth::user()->user_type == 1)
             @php

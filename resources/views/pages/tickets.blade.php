@@ -57,7 +57,7 @@
  $tickets = DB::select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,
 u.firstname,u.middlename,u.lastname , 
 ts.departure,ts.est_arrival,ts.schedule,ts.status as schedulestatus, 
-r.from , r.to,r.aircon_fare,r.non_aircon_fare,r.remarks,
+r.from , r.to,r.aircon_fare,r.non_aircon_fare,
 b.Bus_No,b.seating_capacity,b.company,b.weight,b.color,b.per_column,b.per_row 
 , d.title,d.discount
 from users u inner join tickets t on t.user_id = u.id 
@@ -102,7 +102,7 @@ LEFT JOIN fare_discounts d on d.id = t.discount where u.id = '.$item->id.' ');
                         @else 
 
                         @php
- $tickets = DB::select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile,t.reason ,
+ $tickets = DB::select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile,t.reason ,t.receiptfile,
 u.firstname,u.middlename,u.lastname , 
 ts.departure,ts.est_arrival,ts.schedule,ts.status as schedulestatus, 
 r.from , r.to,r.aircon_fare,r.non_aircon_fare,
@@ -156,6 +156,18 @@ $datenow = date('Y-m-d');
     Non-Aircon : &#8369; {{$val->non_aircon_fare}}
    
     <br>
+
+    @if($val->receiptfile)
+
+        @if(file_exists(public_path().'/attachments/'.$val->receiptfile))
+        <a target="_blank" class="btn btn-primary btn-sm mt-2" href="{{asset('attachments').'/'.$val->receiptfile}}">View Receipt</a>
+        @else 
+
+             <a target="_blank" class="btn btn-primary btn-sm mt-2" href="{{asset('attachments').'/'.$val->receiptfile}}">View Receipt</a>
+        @endif
+
+
+    @endif
    
     <br>
 

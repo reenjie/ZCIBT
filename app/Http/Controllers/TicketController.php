@@ -52,8 +52,8 @@ class TicketController extends Controller
         $email     = $request->email;
         $password  = $request->password;
         $password_confirmation = $request->password_confirmation;
-
-      
+       
+       
         if($request->discount){
             $discount = $request->discount;
         }else {
@@ -69,14 +69,50 @@ class TicketController extends Controller
             $imageName = '';
         }
 
+        if($request->file('gcashreceipt')){
+           $receiptfile = time().'.'.$request->file('gcashreceipt')->getClientOriginalExtension();
+           $request->file('gcashreceipt')->move(public_path('attachments'), $receiptfile);
+
+        }else {
+           $receiptfile = '';
+        }
+
         if(session()->has('reservation')){
             $rs=session()->get('reservation');
           
              $trip =  trip::where('id',$rs['tripid'])->get();
              
-             foreach ($trip as $key => $value) {
+             echo 'savewfile';
+
              
-            $newticket = Ticket::create([
+              foreach ($trip as $key => $value) {
+
+                 
+
+                if(session()->has('multiplesits')){
+                    foreach(session()->get('multiplesits') as $ss){
+
+                        $newticket = Ticket::create([
+                            'tripid'=>$value->id,
+                            'bus_id'=>$value->bus_id,
+                            'column_seat_id'=>$ss,
+                            'row_seat_id'=>$rs['rowid'],
+                            'routes_id'=>$value->routes_id,
+                            'ts_id'=>$value->TS_id,
+                            'user_id'=>Auth::user()->id,
+                            'idfile'=>$imageName,
+                            'receiptfile'=>$receiptfile,
+                            'discount'=>$discount,
+                            'status'=>0,
+                            'pstatus'=>1,
+                            'exp_date'=>null
+                        ]);
+
+                    }
+
+                }else {
+                 $newticket = Ticket::create([
+                'tripid'=>$value->id,
                 'bus_id'=>$value->bus_id,
                 'column_seat_id'=>$rs['colid'],
                 'row_seat_id'=>$rs['rowid'],
@@ -84,10 +120,15 @@ class TicketController extends Controller
                 'ts_id'=>$value->TS_id,
                 'user_id'=>Auth::user()->id,
                 'idfile'=>$imageName,
+                'receiptfile'=>$receiptfile,
                 'discount'=>$discount,
                 'status'=>0,
+                'pstatus'=>1,
                 'exp_date'=>null
             ]);
+                }
+             
+          
 
             return redirect()->route('mailticket',[
                 'ticketID'=>$newticket->id,
@@ -96,11 +137,11 @@ class TicketController extends Controller
                 'busid'   =>$value->bus_id,
             ]);
               
-             }
+              }
 
            
             
-            // return redirect()->route('viewbus',['trip_id'=>$rs['tripid'],'reserve'=>true,'id'=>$value->bus_id,'authenticathed'=>true])->with('success','Ticket Reserved Successfully!');
+         return redirect()->route('viewbus',['trip_id'=>$rs['tripid'],'reserve'=>true,'id'=>$value->bus_id,'authenticathed'=>true])->with('success','Ticket Reserved Successfully!');
   
        
 
@@ -122,6 +163,15 @@ class TicketController extends Controller
             }else {
                 $imageName = '';
             }
+
+
+            if($request->file('gcashreceipt')){
+                $receiptfile = time().'.'.$request->file('gcashreceipt')->getClientOriginalExtension();
+                $request->file('gcashreceipt')->move(public_path('attachments'), $receiptfile);
+     
+             }else {
+                $receiptfile = '';
+             }
 
 
             $user = User::create([
@@ -148,10 +198,46 @@ class TicketController extends Controller
                 $rs=session()->get('reservation');
               
                  $trip =  trip::where('id',$rs['tripid'])->get();
+              
+
                  
-                 foreach ($trip as $key => $value) {
                  
+                  foreach ($trip as $key => $value) {
+
+                 
+
+                    if(session()->has('multiplesits')){
+                       
+                        foreach(session()->get('multiplesits') as $ss){
+                            $newticket=   Ticket::create([
+                                'tripid'=>$value->id,
+                                'bus_id'=>$value->bus_id,
+                                'column_seat_id'=>$ss,
+                                'row_seat_id'=>$rs['rowid'],
+                                'routes_id'=>$value->routes_id,
+                                'ts_id'=>$value->TS_id,
+                                'user_id'=>$userid,
+                                'idfile'=>$imageName,
+                                'receiptfile'=>$receiptfile,
+                                'discount'=>$discount,
+                                'status'=>0,
+                                'pstatus'=>1,
+                                'exp_date'=>null
+                            ]);
+
+                        }
+
+                        return redirect()->route('mailticket',[
+                            'userid' =>$userid,
+                            'ticketID'=>$newticket->id,
+                            'type'    =>'login'
+                        ]);
+
+                    }else {
+
+
                     $newticket=   Ticket::create([
+                    'tripid'=>$value->id,
                     'bus_id'=>$value->bus_id,
                     'column_seat_id'=>$rs['colid'],
                     'row_seat_id'=>$rs['rowid'],
@@ -159,8 +245,10 @@ class TicketController extends Controller
                     'ts_id'=>$value->TS_id,
                     'user_id'=>$userid,
                     'idfile'=>$imageName,
+                    'receiptfile'=>$receiptfile,
                     'discount'=>$discount,
                     'status'=>0,
+                    'pstatus'=>1,
                     'exp_date'=>null
                 ]);
                     
@@ -170,6 +258,9 @@ class TicketController extends Controller
                     'type'    =>'login'
                 ]);
 
+                    }
+                 
+          
                  }
                 
                     
@@ -179,9 +270,9 @@ class TicketController extends Controller
 
 
         
-                //return redirect()->route('login')->with('success','Your Ticket was Reserved Successfully!. For more information or ticket cancellation Please Login into your account . Note : No Credit Card Account information was saved, it is for development purpose only. ');
+              return redirect()->route('login')->with('success','Your Ticket was Reserved Successfully!. For more information or ticket cancellation Please Login into your account . Note : No Credit Card Account information was saved, it is for development purpose only. ');
            } catch (\Throwable $th) {
-           // return $th;
+         //  return $th;
                 echo 'Email Entered already exist in our database. please use a unique Email!';
            } 
     
@@ -258,6 +349,36 @@ class TicketController extends Controller
 
 
     public function reservemultiple_selection(Request $request){
-        dd($request);
+    
+
+        $colid = $request->colid;
+        $rowid = $request->rowid;
+        $tripid = $request->tripid;
+        $auth = $request->auth;
+
+        $data = [
+            'colid'=>$colid,
+            'rowid'=>$rowid,
+            'tripid'=>$tripid
+        ];
+        session(['reservation'=>$data]);    
+
+        $fare = DB::select('select aircon_fare as fare from routes where id = (select routes_id from trips where id = '.$tripid.') ');
+
+       
+      //  echo $colid.$rowid.$tripid.$auth;
+
+        $busdetails = DB::select('select * from buses where id in (select bus_id from trips where id = '.$tripid.' ) ');
+
+        $scheddetails = DB::select('select * from travel_schedules where id in (select TS_id from trips where id = '.$tripid.' ) ');
+
+        $selected = $request->selectedsits;
+
+        session(['multiplesits'=>$selected]);
+
+        
+        
+        return view('payment',compact('auth','fare','selected','busdetails','scheddetails','tripid'));
+
     }
 }

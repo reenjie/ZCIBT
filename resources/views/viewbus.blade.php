@@ -45,10 +45,18 @@
                  </button>
                 </div>
                @endif
-               <button class="btn btn-dark btn-sm" id="setmultiple"> Set Multiple Selection</button>
+                @if(Auth()->check())
+                @if(!Auth()->user()->user_type == 0)
+                <button class="btn btn-dark btn-sm" id="setmultiple"> Set Multiple Selection</button>
+                @endif
+                @else 
+                <button class="btn btn-dark btn-sm" id="setmultiple"> Set Multiple Selection</button>
+
+                @endif
+           
                 <div id="options" class="d-none">
                     <button class="btn btn-danger btn-sm" id="cancel">Cancel Multiple Selection</button>
-                    <button class="btn btn-primary btn-sm" id="clearselection">Clear  Selection</button>
+                    <button class="btn btn-primary btn-sm" id="clearselection" >Clear  Selection</button>
                 </div>
 
             <h6 style="text-align:center">FRONT OF THE BUS</h6>
@@ -128,7 +136,7 @@ tr {float: left!important; width: 50%!important;}
     @isset($viewingticket)
     
     @php
-        $reserved = DB::select('SELECT * FROM `tickets` where bus_id = '.$busid.' and column_seat_id ='.$col->id.' and row_seat_id = '.$col->rowseat_id.' and ts_id ='.$ts_id.'  ');
+        $reserved = DB::select('SELECT * FROM `tickets` where bus_id = '.$busid.' and column_seat_id ='.$col->id.' and ts_id ='.$ts_id.'  ');
         @endphp
 
         @if(count($reserved)>=1)
@@ -137,7 +145,7 @@ tr {float: left!important; width: 50%!important;}
             <span class="badge bg-success mb-3">Selected</span>
           <br>
         <h6 style="text-align:center">
-        <button data-ticket = "{{$val->id}}" data-busid ="{{$busid}}" class="changeseat btn btn-link text-danger btn-sm px-2">Change seat <i class="fas fa-exclamation-triangle"></i></button>
+        <button type="button" data-ticket = "{{$val->id}}" data-busid ="{{$busid}}" class="changeseat btn btn-link text-danger btn-sm px-2">Change seat <i class="fas fa-exclamation-triangle"></i></button>
     </h6>
             @else 
 
@@ -164,7 +172,7 @@ tr {float: left!important; width: 50%!important;}
     @isset($reserve)
     <!--  -->
         @php
-        $reserved = DB::select('SELECT * FROM `tickets` where bus_id = '.$busid.' and column_seat_id ='.$col->id.' and row_seat_id = '.$col->rowseat_id.' and ts_id ='.$ts_id.' ');
+        $reserved = DB::select('SELECT * FROM `tickets` where bus_id = '.$busid.' and column_seat_id ='.$col->id.' and ts_id ='.$ts_id.' ');
         @endphp
 
         @if(count($reserved)>=1)
@@ -177,7 +185,7 @@ tr {float: left!important; width: 50%!important;}
         </script>
           <br>
         <h6 style="text-align:center">
-        <button data-ticket = "{{$val->id}}" data-busid ="{{$busid}}" class="changeseat btn btn-link text-danger btn-sm px-2">Change seat <i class="fas fa-exclamation-triangle"></i></button>
+        <button type="button" data-ticket = "{{$val->id}}" data-busid ="{{$busid}}" class="changeseat btn btn-link text-danger btn-sm px-2">Change seat <i class="fas fa-exclamation-triangle"></i></button>
     </h6>
             @else 
 
@@ -198,6 +206,7 @@ tr {float: left!important; width: 50%!important;}
             @endforeach
       
         @else 
+       
         <script>
             $('#{{$col->id}}data').addClass('table-success');
         </script>
@@ -207,6 +216,10 @@ tr {float: left!important; width: 50%!important;}
         
         <input type="checkbox" style=" width: 28px;
         height: 28px;" class="d-none multipleselect" name="selectedsits[]" value="{{$col->id}}">
+        <input type="hidden" name="auth" value="@isset($authenticathed) 1 @else 0 @endisset">
+        <input type="hidden" name="rowid" value="{{$col->rowseat_id}}">
+        <input type="hidden" name="colid" value="{{$col->id}}">
+        <input type="hidden" name="tripid" value="{{$tripid}}">
      
         @endif
   
@@ -264,6 +277,7 @@ tr {float: left!important; width: 50%!important;}
 
     $('#clearselection').click(function(){
         $('.multipleselect').prop('checked',false);
+        swal ( "Cleared" ,  "Selection Cleared" ,  "success" );
     })
     $('.changeseat').click(function(){
         var id = $(this).data('ticket');

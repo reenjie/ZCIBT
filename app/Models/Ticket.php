@@ -10,6 +10,7 @@ class Ticket extends Model
     use HasFactory;
 
     protected $fillable = [
+        'tripid',
         'bus_id',
         'column_seat_id',
         'row_seat_id',
@@ -18,6 +19,7 @@ class Ticket extends Model
         'user_id',
         'discount',
         'idfile',
+        'receiptfile',
         'status',
         'reason',
         'exp_date'
