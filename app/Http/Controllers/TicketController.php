@@ -52,7 +52,7 @@ class TicketController extends Controller
         $email     = $request->email;
         $password  = $request->password;
         $password_confirmation = $request->password_confirmation;
-       
+      
        
         if($request->discount){
             $discount = $request->discount;
@@ -91,7 +91,7 @@ class TicketController extends Controller
 
                 if(session()->has('multiplesits')){
                     foreach(session()->get('multiplesits') as $ss){
-
+                    
                         $newticket = Ticket::create([
                             'tripid'=>$value->id,
                             'bus_id'=>$value->bus_id,
@@ -111,21 +111,43 @@ class TicketController extends Controller
                     }
 
                 }else {
-                 $newticket = Ticket::create([
-                'tripid'=>$value->id,
-                'bus_id'=>$value->bus_id,
-                'column_seat_id'=>$rs['colid'],
-                'row_seat_id'=>$rs['rowid'],
-                'routes_id'=>$value->routes_id,
-                'ts_id'=>$value->TS_id,
-                'user_id'=>Auth::user()->id,
-                'idfile'=>$imageName,
-                'receiptfile'=>$receiptfile,
-                'discount'=>$discount,
-                'status'=>0,
-                'pstatus'=>1,
-                'exp_date'=>null
-            ]);
+                    if($request->otc){
+                        $newticket = Ticket::create([
+                            'tripid'=>$value->id,
+                            'bus_id'=>$value->bus_id,
+                            'column_seat_id'=>$rs['colid'],
+                            'row_seat_id'=>$rs['rowid'],
+                            'routes_id'=>$value->routes_id,
+                            'ts_id'=>$value->TS_id,
+                            'user_id'=>Auth::user()->id,
+                            'idfile'=>$imageName,
+                            'receiptfile'=>$receiptfile,
+                            'discount'=>$discount,
+                            'status'=>0,
+                            'pstatus'=>0,
+                            'exp_date'=>null
+                        ]);
+                     
+                    }else {
+                        $newticket = Ticket::create([
+                            'tripid'=>$value->id,
+                            'bus_id'=>$value->bus_id,
+                            'column_seat_id'=>$rs['colid'],
+                            'row_seat_id'=>$rs['rowid'],
+                            'routes_id'=>$value->routes_id,
+                            'ts_id'=>$value->TS_id,
+                            'user_id'=>Auth::user()->id,
+                            'idfile'=>$imageName,
+                            'receiptfile'=>$receiptfile,
+                            'discount'=>$discount,
+                            'status'=>0,
+                            'pstatus'=>1,
+                            'exp_date'=>null
+                        ]);
+                      
+                    }
+
+              
                 }
              
           
@@ -235,22 +257,41 @@ class TicketController extends Controller
 
                     }else {
 
+                        if($request->otc){
+                            $newticket=   Ticket::create([
+                                'tripid'=>$value->id,
+                                'bus_id'=>$value->bus_id,
+                                'column_seat_id'=>$rs['colid'],
+                                'row_seat_id'=>$rs['rowid'],
+                                'routes_id'=>$value->routes_id,
+                                'ts_id'=>$value->TS_id,
+                                'user_id'=>$userid,
+                                'idfile'=>$imageName,
+                                'receiptfile'=>$receiptfile,
+                                'discount'=>$discount,
+                                'status'=>0,
+                                'pstatus'=>0,
+                                'exp_date'=>null
+                            ]);
+                        }else {
+                            $newticket=   Ticket::create([
+                                'tripid'=>$value->id,
+                                'bus_id'=>$value->bus_id,
+                                'column_seat_id'=>$rs['colid'],
+                                'row_seat_id'=>$rs['rowid'],
+                                'routes_id'=>$value->routes_id,
+                                'ts_id'=>$value->TS_id,
+                                'user_id'=>$userid,
+                                'idfile'=>$imageName,
+                                'receiptfile'=>$receiptfile,
+                                'discount'=>$discount,
+                                'status'=>0,
+                                'pstatus'=>1,
+                                'exp_date'=>null
+                            ]);
+                        }
 
-                    $newticket=   Ticket::create([
-                    'tripid'=>$value->id,
-                    'bus_id'=>$value->bus_id,
-                    'column_seat_id'=>$rs['colid'],
-                    'row_seat_id'=>$rs['rowid'],
-                    'routes_id'=>$value->routes_id,
-                    'ts_id'=>$value->TS_id,
-                    'user_id'=>$userid,
-                    'idfile'=>$imageName,
-                    'receiptfile'=>$receiptfile,
-                    'discount'=>$discount,
-                    'status'=>0,
-                    'pstatus'=>1,
-                    'exp_date'=>null
-                ]);
+                    
                     
                 return redirect()->route('mailticket',[
                     'userid' =>$userid,
@@ -379,6 +420,16 @@ class TicketController extends Controller
         
         
         return view('payment',compact('auth','fare','selected','busdetails','scheddetails','tripid'));
+
+    }
+
+    public function deleteticket(Request $request){
+       $id = $request->id;
+
+       Ticket::where('id',$id)->delete();
+
+       return redirect()->back();
+
 
     }
 }

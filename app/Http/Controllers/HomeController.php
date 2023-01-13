@@ -32,7 +32,13 @@ class HomeController extends Controller
                 }
            
         }else {
-            return view('dashboard');
+
+                if(!Auth::user()->user_type == 3){
+                    return view('dashboard');
+                }else {
+                    return redirect()->route('page.index', 'trips');
+                }
+            
         }
 
 

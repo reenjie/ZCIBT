@@ -21,6 +21,7 @@ class Ticket extends Model
         'idfile',
         'receiptfile',
         'status',
+        'pstatus',
         'reason',
         'exp_date'
 

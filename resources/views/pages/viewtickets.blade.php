@@ -11,7 +11,7 @@
                 
             </h5>
                 @php
- $tickets = DB::select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,t.receiptfile,
+ $tickets = DB::select('SELECT t.id,t.column_seat_id,t.discount,t.status,t.idfile ,t.reason ,t.receiptfile,t.pstatus,
 u.firstname,u.middlename,u.lastname , 
 ts.departure,ts.est_arrival,ts.schedule,ts.status as schedulestatus, 
 r.from , r.to,r.aircon_fare,r.non_aircon_fare,
@@ -63,6 +63,13 @@ $datenow = date('Y-m-d');
     Non-Aircon : &#8369; {{$val->non_aircon_fare}}
     
     <br>
+     @if($val->pstatus == 0)
+    <span class="badge bg-danger">Unpaid</span>
+
+    @if(!Auth::user()->user_type == 3)
+    <button style="float: right" data-id="{{$val->id}}" class="deleteticket btn btn-danger btn-sm">Delete Ticket <i class="fas fa-warning"></i></button>
+    @endif
+    @endif
     @if($val->receiptfile)
 
         @if(file_exists(public_path().'/attachments/'.$val->receiptfile))
@@ -139,6 +146,24 @@ $datenow = date('Y-m-d');
         </div>
     </div>
 <script>
+    $('.deleteticket').click(function(){
+        var id = $(this).data('id');
+        swal({
+  title: "Are you sure?",
+  text: "Please make sure that the passenger or client will purchase or have pay for the ticket before removing it always take caution. once deleted you will not be able to recover it. still want to continue?",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    window.location.href="{{route('deleteticket')}}?id="+id;
+
+
+  } 
+});
+    })
+
        $('#confirm').click(function(){
         var id = $(this).data('id');
         swal({

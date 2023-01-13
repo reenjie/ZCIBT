@@ -54,6 +54,8 @@ Route::post('reservemultiple_selection',[App\Http\Controllers\TicketController::
 Route::get('actiondiscountrequest',[App\Http\Controllers\TicketController::class, 'actiondiscountrequest'])->name('actiondiscountrequest');
 
 Route::post('saveqr',[App\Http\Controllers\QrcodeController::class, 'update'])->name('saveqr');
+
+Route::get('deleteticket',[App\Http\Controllers\TicketController::class, 'deleteticket'])->name('deleteticket');
 Route::get('Viewing/Bus/Occs',function(Request $request){
 
 

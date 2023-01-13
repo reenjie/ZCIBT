@@ -22,6 +22,8 @@ Tip 2: you can also add an image using data-image tag
              | <span style="text-transform:uppercase">{{Auth::user()->firstname}}</span></span>
         </div>
         <ul class="nav">
+
+            @if(!Auth::user()->user_type == 3)
             <li class="nav-item @if($activePage == 'dashboard') active @endif">
                 <a class="nav-link" href="{{route('dashboard')}}">
                     <i class="nc-icon nc-chart-pie-35"></i>
@@ -29,6 +31,7 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>
            
+            @endif
        <!--      <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#laravelExamples" @if($activeButton =='laravel') aria-expanded="true" @endif>
                     <i>

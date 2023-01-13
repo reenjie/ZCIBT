@@ -253,7 +253,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-md-4">
+          <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <label for="overthecounter" style="font-weight: bold">
@@ -261,7 +261,7 @@
                         </label>
                     </div>
                 </div>
-            </div> --}}
+            </div> 
         </div>
     </div>
 </div>
@@ -316,18 +316,21 @@
                     $('#overthecounter_').addClass('d-none');
                     $('.atmattr').addAttr('required');
                     $('.gcashattr').removeAttr('required');
+                    $('#otc').val('');
                 }else if (selected == 'gcash'){
                     $('#gcash_').removeClass('d-none');
                     $('#atm_').addClass('d-none');
                     $('#overthecounter_').addClass('d-none');
                     $('.atmattr').removeAttr('required');
                     $('.gcashattr').attr('required',true);
+                    $('#otc').val('');
                 }else if (selected == 'overthecounter'){
                     $('#overthecounter_').removeClass('d-none');
                     $('#atm_').addClass('d-none');
                     $('#gcash_').addClass('d-none');
                     $('.atmattr').removeAttr('required');
                     $('.gcashattr').removeAttr('required');
+                    $('#otc').val('1');
                 }
               
             })
