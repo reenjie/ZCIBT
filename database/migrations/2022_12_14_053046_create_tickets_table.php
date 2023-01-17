@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('idfile')->nullable();
             $table->text('receiptfile')->nullable();
             $table->integer('status');
+            $table->integer('pstatus');
             $table->text('reason')->nullable();
             $table->integer('exp_date')->nullable();
             $table->timestamps();
